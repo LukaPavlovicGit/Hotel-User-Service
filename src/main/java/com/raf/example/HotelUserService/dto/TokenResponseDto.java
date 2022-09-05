@@ -5,14 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class ManagerCreateDto extends UserCreateDto{
-    private String hotelName;
-    private Date hireDate;
+public class TokenResponseDto {
+    private String token;
 }
