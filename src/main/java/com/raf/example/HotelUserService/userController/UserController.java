@@ -1,6 +1,6 @@
 package com.raf.example.HotelUserService.userController;
 
-import com.raf.example.HotelUserService.service.UserService;
+import com.raf.example.HotelUserService.service.userService.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

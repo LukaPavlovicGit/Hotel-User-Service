@@ -1,6 +1,7 @@
 package com.raf.example.HotelUserService.secutiry;
 
-import com.raf.example.HotelUserService.secutiry.service.TokenService;
+import com.raf.example.HotelUserService.service.tokenService.service.TokenService;
+import io.jsonwebtoken.Claims;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -26,7 +27,7 @@ public class SecurityAspect {
         this.tokenService = tokenService;
     }
 
-    @Around("@annotation(com.raf.cinemauserservice.secutiry.CheckSecurity)")
+    @Around("@annotation(com.raf.example.HotelUserService.secutiry.CheckSecurity)")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         //Get method signature
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();

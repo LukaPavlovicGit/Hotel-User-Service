@@ -1,6 +1,6 @@
-package com.raf.example.HotelUserService.service.implementation;
+package com.raf.example.HotelUserService.service.userService;
 
-import com.raf.example.HotelUserService.service.UserService;
+import com.raf.example.HotelUserService.service.userService.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

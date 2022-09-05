@@ -1,4 +1,4 @@
-package com.raf.example.HotelUserService.secutiry.service;
+package com.raf.example.HotelUserService.service.tokenService.service;
 
 import io.jsonwebtoken.Claims;
 
