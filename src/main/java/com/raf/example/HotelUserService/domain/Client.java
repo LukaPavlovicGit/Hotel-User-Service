@@ -13,5 +13,8 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 
 @Entity
-public class Client extends User{
+public class Client extends User {
+
+    private Integer numOfPassport = 0;
+    private Integer numOfReservation = 0;
 }

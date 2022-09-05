@@ -25,5 +25,7 @@ public abstract class User {
     private String email;
     private String phoneNumber;
     private Date birthdate;
-
+    @OneToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 }

@@ -1,21 +1,24 @@
-package com.raf.example.HotelUserService.domain;
+package com.raf.example.HotelUserService.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
 import java.util.Date;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
-@Entity
-public class Manager extends User{
+public class ManagerDto {
 
+    private String fistName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
+    private Date birthdate;
     private String hotelName;
     private Date hireDate;
+
 }
