@@ -2,6 +2,8 @@ package com.raf.example.HotelUserService.secutiry;
 
 import com.raf.example.HotelUserService.service.tokenService.service.TokenService;
 import io.jsonwebtoken.Claims;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,6 +15,10 @@ import org.springframework.http.ResponseEntity;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+
+
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Aspect
 @Configuration
@@ -59,7 +65,7 @@ public class SecurityAspect {
         if (Arrays.asList(checkSecurity.roles()).contains(role)) {
             return joinPoint.proceed();
         }
-        //Return FORBIDDEN if user has't appropriate role for specified route
+        //Return FORBIDDEN if user hasn't appropriate role for specified route
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
