@@ -1,4 +1,4 @@
-package com.raf.example.HotelUserService.dto;
+package com.raf.example.HotelUserService.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +12,6 @@ import java.util.Date;
 @NoArgsConstructor
 
 public class ManagerDto {
-
     private String fistName;
     private String lastName;
     private String email;
@@ -20,5 +19,4 @@ public class ManagerDto {
     private Date birthdate;
     private String hotelName;
     private Date hireDate;
-
 }

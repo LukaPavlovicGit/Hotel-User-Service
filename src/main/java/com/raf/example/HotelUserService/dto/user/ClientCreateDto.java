@@ -1,4 +1,4 @@
-package com.raf.example.HotelUserService.dto;
+package com.raf.example.HotelUserService.dto.user;
 
 import com.raf.example.HotelUserService.domain.Role;
 import jakarta.validation.constraints.Email;
@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
+
 import java.util.Date;
 
 @Getter
@@ -16,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public abstract class UserCreateDto {
+public class ClientCreateDto {
     @NotBlank
     private String username;
 

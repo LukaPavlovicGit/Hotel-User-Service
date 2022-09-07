@@ -1,4 +1,4 @@
-package com.raf.example.HotelUserService.dto;
+package com.raf.example.HotelUserService.dto.token;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class TokenRequestDto {
-    private String username;
-    private String password;
+public class TokenResponseDto {
+    private String token;
 }

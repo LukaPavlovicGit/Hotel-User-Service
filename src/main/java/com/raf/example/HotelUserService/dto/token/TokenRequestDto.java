@@ -1,16 +1,16 @@
-package com.raf.example.HotelUserService.dto;
+package com.raf.example.HotelUserService.dto.token;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class ClientCreateDto extends UserCreateDto {
-
+public class TokenRequestDto {
+    private String username;
+    private String password;
 }

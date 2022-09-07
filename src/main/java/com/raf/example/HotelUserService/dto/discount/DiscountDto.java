@@ -1,4 +1,4 @@
-package com.raf.example.HotelUserService.dto;
+package com.raf.example.HotelUserService.dto.discount;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class TokenResponseDto {
-    private String token;
+public class DiscountDto {
+    private Integer discount;
 }
