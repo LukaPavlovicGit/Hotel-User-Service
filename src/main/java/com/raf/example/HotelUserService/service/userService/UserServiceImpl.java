@@ -32,7 +32,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<UserDto> findAll(Pageable pageable) {
+    public Page<ClientDto> findAllClients(Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public Page<ManagerDto> findAllManagers(Pageable pageable) {
         return null;
     }
 

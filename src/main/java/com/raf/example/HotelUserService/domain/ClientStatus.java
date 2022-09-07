@@ -14,7 +14,7 @@ import javax.persistence.*;
 
 @Entity
 
-public class UserStatus {
+public class ClientStatus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
