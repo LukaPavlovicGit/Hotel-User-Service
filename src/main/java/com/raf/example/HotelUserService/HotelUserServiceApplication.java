@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 
+
 @SpringBootApplication
 public class HotelUserServiceApplication {
 
@@ -17,5 +18,6 @@ public class HotelUserServiceApplication {
 	public ModelMapper modelMapper(){
 		return new ModelMapper();
 	}
+
 
 }
