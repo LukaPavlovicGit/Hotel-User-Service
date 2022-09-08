@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface UserService {
 
+    Page<UserDto> findAll(Pageable pageable);
     Page<ClientDto> findAllClients(Pageable pageable);
 
     Page<ManagerDto> findAllManagers(Pageable pageable);

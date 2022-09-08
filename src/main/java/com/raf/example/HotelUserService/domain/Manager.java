@@ -6,30 +6,26 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-@Getter
-@Setter
+
 @AllArgsConstructor
 @NoArgsConstructor
 
 @Entity
-@Table(indexes = {@Index(columnList = "username", unique = true), @Index(columnList = "email", unique = true)})
-public class Manager{
+public class Manager extends User{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String username;
-    private String password;
-    private String fistName;
-    private String lastName;
-    private String email;
-    private String phoneNumber;
-    private Date birthdate;
-    @OneToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @NotBlank
     private String hotelName;
+    @NotBlank
     private Date hireDate;
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
 }

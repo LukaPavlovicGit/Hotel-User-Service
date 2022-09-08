@@ -9,7 +9,6 @@ import com.raf.example.HotelUserService.service.userService.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +17,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Getter
 @Setter
@@ -55,13 +56,13 @@ public class UserController {
     }
 
     @ApiOperation(value = "Register client")
-    @PostMapping
+    @PostMapping("/registration/client")
     public ResponseEntity<ClientDto> saveClient(@RequestBody @Valid ClientCreateDto clientCreateDto) {
         return new ResponseEntity<>(userService.addClient(clientCreateDto), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Register manager")
-    @PostMapping
+    @PostMapping("/registration/manager")
     public ResponseEntity<ManagerDto> saveManager(@RequestBody @Valid ManagerCreateDto managerCreateDto) {
         return new ResponseEntity<>(userService.addManager(managerCreateDto), HttpStatus.CREATED);
     }

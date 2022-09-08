@@ -7,8 +7,6 @@ import com.raf.example.HotelUserService.dto.user.*;
 import com.raf.example.HotelUserService.repository.UserRepository;
 import com.raf.example.HotelUserService.repository.UserStatusRepository;
 import com.raf.example.HotelUserService.service.tokenService.service.TokenService;
-import com.raf.example.HotelUserService.service.userService.UserService;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jms.core.JmsTemplate;
@@ -29,6 +27,11 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
         this.tokenService = tokenService;
         this.userStatusRepository = userStatusRepository;
+    }
+
+    @Override
+    public Page<UserDto> findAll(Pageable pageable) {
+        return null;
     }
 
     @Override

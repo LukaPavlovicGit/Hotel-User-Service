@@ -18,6 +18,7 @@ public class ClientStatus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Long userId;
     private Boolean accessForbidden;
     private Integer discount;
