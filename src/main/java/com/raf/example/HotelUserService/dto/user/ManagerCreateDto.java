@@ -40,21 +40,6 @@ public class ManagerCreateDto{
     @NotBlank
     private Date hireDate;
 
-    public  ManagerCreateDto(){}
-
-    public ManagerCreateDto(String username, String password, String fistName, String lastName, String email, String phoneNumber, Date birthdate, Role role, String hotelName, Date hireDate) {
-        this.username = username;
-        this.password = password;
-        this.fistName = fistName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.birthdate = birthdate;
-        this.role = role;
-        this.hotelName = hotelName;
-        this.hireDate = hireDate;
-    }
-
     public String getUsername() {
         return username;
     }

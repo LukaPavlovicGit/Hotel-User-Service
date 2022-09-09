@@ -50,7 +50,7 @@ public class UserController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUser(@PathVariable("id") Long id){
-        return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
     }
 
     @GetMapping("/clients")
@@ -67,9 +67,9 @@ public class UserController {
         return new ResponseEntity<>(userService.findAllManagers(pageable), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/discount")
-    public ResponseEntity<DiscountDto> getDiscount(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(userService.findDiscount(id), HttpStatus.OK);
+    @GetMapping("/discount/{clientId}")
+    public ResponseEntity<DiscountDto> getDiscount(@PathVariable("clientId") Long clientId) {
+        return new ResponseEntity<>(userService.findDiscount(clientId), HttpStatus.OK);
     }
 
     @PostMapping("/registration/client")

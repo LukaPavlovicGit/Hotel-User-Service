@@ -12,18 +12,6 @@ public class ManagerDto {
     private String hotelName;
     private Date hireDate;
 
-    public ManagerDto(){}
-
-    public ManagerDto(String fistName, String lastName, String email, String phoneNumber, Date birthdate, String hotelName, Date hireDate) {
-        this.fistName = fistName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.birthdate = birthdate;
-        this.hotelName = hotelName;
-        this.hireDate = hireDate;
-    }
-
     public String getFistName() {
         return fistName;
     }

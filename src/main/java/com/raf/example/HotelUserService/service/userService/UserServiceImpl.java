@@ -1,8 +1,10 @@
 package com.raf.example.HotelUserService.service.userService;
 
 import com.raf.example.HotelUserService.domain.Client;
+import com.raf.example.HotelUserService.domain.ClientStatus;
 import com.raf.example.HotelUserService.domain.Manager;
 import com.raf.example.HotelUserService.domain.User;
+import com.raf.example.HotelUserService.dto.clientStatus.ClientStatusDto;
 import com.raf.example.HotelUserService.dto.discount.DiscountDto;
 import com.raf.example.HotelUserService.dto.token.TokenRequestDto;
 import com.raf.example.HotelUserService.dto.token.TokenResponseDto;
@@ -10,7 +12,7 @@ import com.raf.example.HotelUserService.dto.user.*;
 import com.raf.example.HotelUserService.exception.NotFoundException;
 import com.raf.example.HotelUserService.mapper.Mapper;
 import com.raf.example.HotelUserService.repository.UserRepository;
-import com.raf.example.HotelUserService.repository.UserStatusRepository;
+import com.raf.example.HotelUserService.repository.ClientStatusRepository;
 import com.raf.example.HotelUserService.service.tokenService.service.TokenService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -23,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -31,16 +32,17 @@ public class UserServiceImpl implements UserService {
 
     private TokenService tokenService;
     private UserRepository userRepository;
-    private UserStatusRepository userStatusRepository;
+    private ClientStatusRepository clientStatusRepository;
     private Mapper mapper;
 
     private JmsTemplate jmsTemplate; // injectuj preko konstruktora
 
-    public UserServiceImpl(UserRepository userRepository, TokenService tokenService, UserStatusRepository userStatusRepository, Mapper mapper) {
+    public UserServiceImpl(UserRepository userRepository, TokenService tokenService, ClientStatusRepository clientStatusRepository, Mapper mapper, JmsTemplate jmsTemplate) {
         this.userRepository = userRepository;
         this.tokenService = tokenService;
-        this.userStatusRepository = userStatusRepository;
+        this.clientStatusRepository = clientStatusRepository;
         this.mapper = mapper;
+        this.jmsTemplate = jmsTemplate;
     }
 
     @Override
@@ -50,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto findById(Long id) {
+    public UserDto findUserById(Long id) {
         return userRepository.findById(id)
                 .map(mapper::userToUserDto)
                 .orElseThrow(() -> new NotFoundException(String.format("User with id: %d does not exists.", id)));
@@ -83,18 +85,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public DiscountDto findDiscount(Long id) {
-        return null;
+    public DiscountDto findDiscount(Long clientId) {
+        ClientStatus clientStatus = clientStatusRepository.findClientStatusByUserId(clientId)
+                .orElseThrow(() -> new NotFoundException(String.format("Client with id: %d does not exists.", clientId)));
+
+        return new DiscountDto(clientStatus.getDiscount());
     }
 
     @Override
     public ClientDto addClient(ClientCreateDto clientCreateDto) {
-        return null;
+        Client client = mapper.clientCreateDtoToClient(clientCreateDto);
+        userRepository.save(client);
+        return mapper.clientToClientDto(client);
     }
 
     @Override
     public ManagerDto addManager(ManagerCreateDto managerCreateDto) {
-        return null;
+        Manager manager = mapper.managerCreateDtoToManager(managerCreateDto);
+        userRepository.save(manager);
+        return mapper.managerToManagerDto(manager);
     }
 
     @Override
@@ -111,5 +120,17 @@ public class UserServiceImpl implements UserService {
         claims.put("role", user.getRole().getName());
         //Generate token
         return new TokenResponseDto(tokenService.generate(claims));
+    }
+
+    @Override
+    public ClientStatusDto findClientStatusByClientId(Long clientId) {
+        return clientStatusRepository.findClientStatusByUserId(clientId)
+                .map(mapper::clientStatusToClientStatusDto)
+                .orElseThrow(() -> new NotFoundException(String.format("Client with id: %d does not exists.", clientId)));
+    }
+
+    @Override
+    public void forbidAccess(Long id) {
+
     }
 }

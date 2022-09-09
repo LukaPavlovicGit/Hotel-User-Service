@@ -1,8 +1,10 @@
 package com.raf.example.HotelUserService.mapper;
 
 import com.raf.example.HotelUserService.domain.Client;
+import com.raf.example.HotelUserService.domain.ClientStatus;
 import com.raf.example.HotelUserService.domain.Manager;
 import com.raf.example.HotelUserService.domain.User;
+import com.raf.example.HotelUserService.dto.clientStatus.ClientStatusDto;
 import com.raf.example.HotelUserService.dto.user.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,12 +20,6 @@ public class Mapper {
 
     public Mapper(ModelMapper modelMapper){
         this.modelMapper = modelMapper;
-    }
-
-    public User userDtoToUser(UserDto userDto){
-        User user = new User();
-        user = modelMapper.map(userDto, User.class);
-        return user;
     }
 
     public UserDto userToUserDto(User user){
@@ -54,6 +50,12 @@ public class Mapper {
         ManagerDto managerDto = new ManagerDto();
         managerDto = modelMapper.map(manager, ManagerDto.class);
         return managerDto;
+    }
+
+    public ClientStatusDto clientStatusToClientStatusDto(ClientStatus clientStatus){
+        ClientStatusDto clientStatusDto = new ClientStatusDto();
+        clientStatusDto = modelMapper.map(clientStatus, ClientStatusDto.class);
+        return clientStatusDto;
     }
 
 }

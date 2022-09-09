@@ -1,38 +1,13 @@
-package com.raf.example.HotelUserService.domain;
+package com.raf.example.HotelUserService.dto.clientStatus;
+
 import com.raf.example.HotelUserService.rank.Rank;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+public class ClientStatusDto {
 
-@Entity
-@Table(indexes = {@Index(columnList = "userId", unique = true)})
-public class ClientStatus {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @NotBlank
     private Long userId;
     private Boolean accessForbidden;
     private Integer discount;
     private Rank rank;
-
-    public ClientStatus(){
-        this.accessForbidden = false;
-        this.discount = 0;
-        this.rank = Rank.BRONZE;
-    }
-
-    public ClientStatus(Long userId) {
-        this.userId = userId;
-        this.accessForbidden = false;
-        this.discount = 0;
-        this.rank = Rank.BRONZE;
-    }
-
-    public Long getId() {
-        return id;
-    }
 
     public Long getUserId() {
         return userId;

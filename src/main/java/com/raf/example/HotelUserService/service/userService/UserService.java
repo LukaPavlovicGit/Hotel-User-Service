@@ -1,5 +1,6 @@
 package com.raf.example.HotelUserService.service.userService;
 
+import com.raf.example.HotelUserService.dto.clientStatus.ClientStatusDto;
 import com.raf.example.HotelUserService.dto.discount.DiscountDto;
 import com.raf.example.HotelUserService.dto.token.TokenRequestDto;
 import com.raf.example.HotelUserService.dto.token.TokenResponseDto;
@@ -11,7 +12,7 @@ public interface UserService {
 
     Page<UserDto> findAll(Pageable pageable);
 
-    UserDto findById(Long id);
+    UserDto findUserById(Long id);
 
     Page<ClientDto> findAllClients(Pageable pageable);
 
@@ -24,4 +25,8 @@ public interface UserService {
     ManagerDto addManager(ManagerCreateDto managerCreateDto);
 
     TokenResponseDto login(TokenRequestDto tokenRequestDto);
+
+    ClientStatusDto findClientStatusByClientId(Long userId);
+
+    void forbidAccess(Long id);
 }
