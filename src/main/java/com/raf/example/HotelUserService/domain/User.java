@@ -1,17 +1,10 @@
 package com.raf.example.HotelUserService.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@AllArgsConstructor
-@NoArgsConstructor
 
 @Entity
 @Table(name = "users" ,indexes = {@Index(columnList = "username", unique = true), @Index(columnList = "email", unique = true)})
@@ -39,12 +32,22 @@ public class User {
     @NotNull
     private Role role;
 
-    public Long getId() {
-        return id;
+    public User(){}
+
+    public User(Long id, String username, String password, String fistName, String lastName, String email, String phoneNumber, Date birthdate, Role role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.fistName = fistName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.birthdate = birthdate;
+        this.role = role;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return id;
     }
 
     public String getUsername() {

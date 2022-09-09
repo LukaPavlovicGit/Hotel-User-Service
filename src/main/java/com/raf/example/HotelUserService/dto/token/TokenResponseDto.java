@@ -1,15 +1,21 @@
 package com.raf.example.HotelUserService.dto.token;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-
 public class TokenResponseDto {
     private String token;
+
+    public TokenResponseDto(){
+
+    }
+
+    public TokenResponseDto(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }
