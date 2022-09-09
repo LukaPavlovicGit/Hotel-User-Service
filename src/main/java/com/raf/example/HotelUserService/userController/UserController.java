@@ -46,8 +46,25 @@ public class UserController {
     @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_USER"})
     public ResponseEntity<Page<UserDto>> getAllUsers(@RequestHeader("Authorization") String authorization,
                                                      Pageable pageable) {
-
         return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getUser(@PathVariable("id") Long id){
+        return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/clients")
+    @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_USER"})
+    public ResponseEntity<Page<ClientDto>> getClients(@RequestHeader("Authorization") String authorization,
+                                                      Pageable pageable){
+        return new ResponseEntity<>(userService.findAllClients(pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/managers")
+    @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_USER"})
+    public ResponseEntity<Page<ManagerDto>> getManagers(@RequestHeader("Authorization") String authorization,
+                                                      Pageable pageable){
+        return new ResponseEntity<>(userService.findAllManagers(pageable), HttpStatus.OK);
     }
 
     @GetMapping("/{id}/discount")
@@ -55,19 +72,16 @@ public class UserController {
         return new ResponseEntity<>(userService.findDiscount(id), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Register client")
     @PostMapping("/registration/client")
     public ResponseEntity<ClientDto> saveClient(@RequestBody @Valid ClientCreateDto clientCreateDto) {
         return new ResponseEntity<>(userService.addClient(clientCreateDto), HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "Register manager")
     @PostMapping("/registration/manager")
     public ResponseEntity<ManagerDto> saveManager(@RequestBody @Valid ManagerCreateDto managerCreateDto) {
         return new ResponseEntity<>(userService.addManager(managerCreateDto), HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "Login")
     @PostMapping("/login")
     public ResponseEntity<TokenResponseDto> loginUser(@RequestBody @Valid TokenRequestDto tokenRequestDto) {
         return new ResponseEntity<>(userService.login(tokenRequestDto), HttpStatus.OK);

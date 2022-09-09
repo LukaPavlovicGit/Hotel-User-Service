@@ -41,11 +41,13 @@ public class SecurityAspect {
         //Check for authorization parameter
         String token = null;
         for (int i = 0; i < methodSignature.getParameterNames().length; i++) {
+
             if (methodSignature.getParameterNames()[i].equals("authorization")) {
                 //Check bearer schema
-                if (joinPoint.getArgs()[i].toString().startsWith("Bearer")) {
+                if (joinPoint.getArgs()[i].toString().startsWith("\"token\"")) {
                     //Get token
                     token = joinPoint.getArgs()[i].toString().split(" ")[1];
+                    token = token.substring(1, token.length()-1);
                 }
             }
         }

@@ -2,10 +2,8 @@ package com.raf.example.HotelUserService.mapper;
 
 import com.raf.example.HotelUserService.domain.Client;
 import com.raf.example.HotelUserService.domain.Manager;
-import com.raf.example.HotelUserService.dto.user.ClientCreateDto;
-import com.raf.example.HotelUserService.dto.user.ClientDto;
-import com.raf.example.HotelUserService.dto.user.ManagerCreateDto;
-import com.raf.example.HotelUserService.dto.user.ManagerDto;
+import com.raf.example.HotelUserService.domain.User;
+import com.raf.example.HotelUserService.dto.user.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -20,6 +18,18 @@ public class Mapper {
 
     public Mapper(ModelMapper modelMapper){
         this.modelMapper = modelMapper;
+    }
+
+    public User userDtoToUser(UserDto userDto){
+        User user = new User();
+        user = modelMapper.map(userDto, User.class);
+        return user;
+    }
+
+    public UserDto userToUserDto(User user){
+        UserDto userDto = new UserDto();
+        userDto = modelMapper.map(user, UserDto.class);
+        return userDto;
     }
 
     public Client clientCreateDtoToClient(ClientCreateDto clientCreateDto){
