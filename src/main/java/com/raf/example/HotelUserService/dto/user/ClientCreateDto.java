@@ -31,20 +31,10 @@ public class ClientCreateDto {
     @NotBlank
     private Date birthdate;
 
-    @NotNull
-    private Role role;
+    @NotBlank
+    private String numOfPassport;
 
     public ClientCreateDto(){}
-    public ClientCreateDto(String username, String password, String fistName, String lastName, String email, String phoneNumber, Date birthdate, Role role) {
-        this.username = username;
-        this.password = password;
-        this.fistName = fistName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.birthdate = birthdate;
-        this.role = role;
-    }
 
     public String getUsername() {
         return username;
@@ -102,11 +92,12 @@ public class ClientCreateDto {
         this.birthdate = birthdate;
     }
 
-    public Role getRole() {
-        return role;
+    public String getNumOfPassport() {
+        return numOfPassport;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setNumOfPassport(String numOfPassport) {
+        this.numOfPassport = numOfPassport;
     }
+
 }

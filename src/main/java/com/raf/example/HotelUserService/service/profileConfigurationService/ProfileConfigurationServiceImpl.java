@@ -63,7 +63,7 @@ public class ProfileConfigurationServiceImpl implements ProfileConfigurationServ
         PayloadWrapper payloadWrapper = gson.fromJson(decodedJSON, PayloadWrapper.class);
         User user = userRepository.findById(payloadWrapper.getId())
                 .orElseThrow(() -> new NotFoundException(String.format("User with id: %d does not exists.", payloadWrapper.getId())));
-        user.setFistName(firstnameDto.getFirstname());
+        user.setFirstName(firstnameDto.getFirstname());
         userRepository.save(user);
 
         return mapper.userToUserDto(user);

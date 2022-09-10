@@ -26,7 +26,7 @@ public class ClientStatusServiceImpl implements ClientStatusService {
 
     @Override
     public DiscountDto findDiscount(Long clientId) {
-        com.raf.example.HotelUserService.domain.ClientStatus clientStatus = clientStatusRepository.findClientStatusByUserId(clientId)
+        ClientStatus clientStatus = clientStatusRepository.findClientStatusByUserId(clientId)
                 .orElseThrow(() -> new NotFoundException(String.format("Client with id: %d does not exists.", clientId)));
 
         return new DiscountDto(clientStatus.getDiscount());
@@ -45,17 +45,16 @@ public class ClientStatusServiceImpl implements ClientStatusService {
                 .orElseThrow(() -> new NotFoundException(String.format("Client with id: %d does not exists.", clientId)));
         clientStatus.setAccessForbidden(true);
         clientStatusRepository.save(clientStatus);
-
         return mapper.clientStatusToClientStatusDto(clientStatus);
     }
 
     @Override
     public ClientStatusDto allowAccess(Long clientId) {
-        ClientStatus clientStatus = clientStatusRepository.findClientStatusByUserId(clientId)
+        ClientStatus clientStatus = clientStatusRepository
+                .findClientStatusByUserId(clientId)
                 .orElseThrow(() -> new NotFoundException(String.format("Client with id: %d does not exists.", clientId)));
         clientStatus.setAccessForbidden(false);
         clientStatusRepository.save(clientStatus);
-
         return mapper.clientStatusToClientStatusDto(clientStatus);
     }
 }

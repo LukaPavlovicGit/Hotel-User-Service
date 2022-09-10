@@ -23,7 +23,7 @@ public class ClientStatusController {
     }
 
     @GetMapping("/discount/{clientId}")
-    @CheckSecurity(roles = {"ROLE_CLIENT", "ROLE_ADMIN"})
+    @CheckSecurity(roles = {"ROLE_MANAGER", "ROLE_ADMIN"})
     public ResponseEntity<DiscountDto> getDiscount(@RequestHeader("authorization") String authorization,
                                                         @PathVariable("clientId") Long clientId) {
         return new ResponseEntity<>(clientStatusService.findDiscount(clientId), HttpStatus.OK);

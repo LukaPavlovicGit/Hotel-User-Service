@@ -1,13 +1,14 @@
 package com.raf.example.HotelUserService.service.userService;
 
-import com.raf.example.HotelUserService.domain.Client;
-import com.raf.example.HotelUserService.domain.Manager;
-import com.raf.example.HotelUserService.domain.User;
+import com.raf.example.HotelUserService.domain.*;
 import com.raf.example.HotelUserService.dto.token.TokenRequestDto;
 import com.raf.example.HotelUserService.dto.token.TokenResponseDto;
 import com.raf.example.HotelUserService.dto.user.*;
+import com.raf.example.HotelUserService.exception.AccessForbidden;
 import com.raf.example.HotelUserService.exception.NotFoundException;
 import com.raf.example.HotelUserService.mapper.Mapper;
+import com.raf.example.HotelUserService.repository.ClientStatusRepository;
+import com.raf.example.HotelUserService.repository.RoleRepository;
 import com.raf.example.HotelUserService.repository.UserRepository;
 import com.raf.example.HotelUserService.secutiry.tokenService.TokenService;
 import io.jsonwebtoken.Claims;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -28,12 +30,19 @@ public class UserServiceImpl implements UserService {
 
     private TokenService tokenService;
     private UserRepository userRepository;
+    private RoleRepository roleRepository;
+
+    private ClientStatusRepository clientStatusRepository;
+
     private Mapper mapper;
     private JmsTemplate jmsTemplate; // injectuj preko konstruktora
 
-    public UserServiceImpl(UserRepository userRepository, TokenService tokenService, Mapper mapper, JmsTemplate jmsTemplate) {
+    public UserServiceImpl(UserRepository userRepository, TokenService tokenService, RoleRepository roleRepository,
+                                ClientStatusRepository clientStatusRepository, Mapper mapper, JmsTemplate jmsTemplate) {
         this.userRepository = userRepository;
         this.tokenService = tokenService;
+        this.roleRepository = roleRepository;
+        this.clientStatusRepository = clientStatusRepository;
         this.mapper = mapper;
         this.jmsTemplate = jmsTemplate;
     }
@@ -56,7 +65,7 @@ public class UserServiceImpl implements UserService {
         List<ClientDto> clients = new ArrayList<>();
         userRepository.findAll(pageable)
                 .forEach( user -> {
-                        if(user.getRole().getName().equals("ROLE_USER"))
+                        if(user.getRole().getName().equals("ROLE_CLIENT"))
                             clients.add(mapper.clientToClientDto((Client) user));
                     }
                 );
@@ -79,14 +88,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ClientDto addClient(ClientCreateDto clientCreateDto) {
+        Role role = roleRepository.findRoleByName("ROLE_CLIENT")
+                .orElseThrow(() -> new NotFoundException("Role with name: ROLE_CLIENT not found."));
         Client client = mapper.clientCreateDtoToClient(clientCreateDto);
+        client.setRole(role);
         userRepository.save(client);
         return mapper.clientToClientDto(client);
     }
 
     @Override
     public ManagerDto addManager(ManagerCreateDto managerCreateDto) {
+        Role role = roleRepository.findRoleByName("ROLE_MANAGER")
+                .orElseThrow(() -> new NotFoundException("Role with name: ROLE_MANAGER not found."));
         Manager manager = mapper.managerCreateDtoToManager(managerCreateDto);
+        manager.setRole(role);
         userRepository.save(manager);
         return mapper.managerToManagerDto(manager);
     }
@@ -96,9 +111,18 @@ public class UserServiceImpl implements UserService {
         //Try to find active user for specified credentials
         User user = userRepository
                 .findUserByUsernameAndPassword(tokenRequestDto.getUsername(), tokenRequestDto.getPassword())
-                .orElseThrow(() -> new NotFoundException(String
-                        .format("User with username: %s and password: %s not found.", tokenRequestDto.getUsername(),
-                                tokenRequestDto.getPassword())));
+                .orElseThrow(() -> new NotFoundException(String.format("User with username: %s and password: %s not found.",
+                        tokenRequestDto.getUsername(), tokenRequestDto.getPassword())));
+        if(user instanceof  Client){
+            Optional<ClientStatus> clientStatusOptional = clientStatusRepository.findClientStatusByUserId(user.getId());
+            if(clientStatusOptional.isPresent()){
+                ClientStatus clientStatus = clientStatusOptional.get();
+                if(clientStatus.getAccessForbidden() == true){
+                    throw new AccessForbidden(String.format("Access forbidden for client with username: %s.", tokenRequestDto.getUsername()));
+                }
+            }
+        }
+
         //Create token payload
         Claims claims = Jwts.claims();
         claims.put("id", user.getId());

@@ -19,7 +19,7 @@ public class User {
     @NotNull
     private String password;
     @NotNull
-    private String fistName;
+    private String firstName;
     @NotNull
     private String lastName;
     @NotNull
@@ -34,10 +34,10 @@ public class User {
 
     public User(){}
 
-    public User(String username, String password, String fistName, String lastName, String email, String phoneNumber, Date birthdate, Role role) {
+    public User(String username, String password, String firstName, String lastName, String email, String phoneNumber, Date birthdate, Role role) {
         this.username = username;
         this.password = password;
-        this.fistName = fistName;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -65,12 +65,12 @@ public class User {
         this.password = password;
     }
 
-    public String getFistName() {
-        return fistName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFistName(String fistName) {
-        this.fistName = fistName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {

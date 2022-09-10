@@ -31,13 +31,9 @@ public class ManagerCreateDto{
     @NotBlank
     private Date birthdate;
 
-    @NotNull
-    private Role role;
-
     @NotBlank
     private String hotelName;
 
-    @NotBlank
     private Date hireDate;
 
     public String getUsername() {
@@ -94,14 +90,6 @@ public class ManagerCreateDto{
 
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     public String getHotelName() {
