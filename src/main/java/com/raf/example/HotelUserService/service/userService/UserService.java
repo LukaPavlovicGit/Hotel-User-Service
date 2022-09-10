@@ -18,15 +18,10 @@ public interface UserService {
 
     Page<ManagerDto> findAllManagers(Pageable pageable);
 
-    DiscountDto findDiscount(Long id);
-
     ClientDto addClient(ClientCreateDto clientCreateDto);
 
     ManagerDto addManager(ManagerCreateDto managerCreateDto);
 
     TokenResponseDto login(TokenRequestDto tokenRequestDto);
 
-    ClientStatusDto findClientStatusByClientId(Long userId);
-
-    void forbidAccess(Long id);
 }

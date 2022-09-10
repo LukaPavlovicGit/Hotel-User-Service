@@ -1,6 +1,6 @@
 package com.raf.example.HotelUserService.configuration;
 
-import com.raf.example.HotelUserService.userController.UserController;
+import com.raf.example.HotelUserService.controller.UserController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -27,7 +27,7 @@ public class SwaggerConfiguration {
 
     private ApiInfo metaData() {
         return new ApiInfo("API", "API swagger definition", "1.0.0"
-                , "Terms of service", new Contact("Mihailo Radovic", "", "mradovic@raf.rs")
+                , "Terms of service", new Contact("Luka Pavlovic", "", "lpavlovic@raf.rs")
                 , "", "", Collections.emptyList());
     }
 
