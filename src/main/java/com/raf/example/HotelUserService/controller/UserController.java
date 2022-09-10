@@ -37,29 +37,30 @@ public class UserController {
     @GetMapping
     @ApiOperation(value = "get all users")
     @CheckSecurity(roles = {"ROLE_CLIENT", "ROLE_MANAGER", "ROLE_ADMIN"})
-    public ResponseEntity<Page<UserDto>> getAllUsers(@RequestHeader("Authorization") String authorization,
-                                                     Pageable pageable) {
+    public ResponseEntity<Page<UserDto>> getAllUsers(@RequestHeader("authorization") String authorization,
+                                                         Pageable pageable) {
         return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
     }
     @GetMapping("/{id}")
     @ApiOperation(value = "get user by id")
     @CheckSecurity(roles = {"ROLE_CLIENT", "ROLE_MANAGER", "ROLE_ADMIN"})
-    public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id){
+    public ResponseEntity<UserDto> getUserById(@RequestHeader("authorization") String authorization,
+                                                        @PathVariable("id") Long id){
         return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
     }
 
     @GetMapping("/clients")
     @ApiOperation(value = "get all clients")
     @CheckSecurity(roles = {"ROLE_CLIENT", "ROLE_MANAGER", "ROLE_ADMIN"})
-    public ResponseEntity<Page<ClientDto>> getClients(@RequestHeader("Authorization") String authorization,
-                                                      Pageable pageable){
+    public ResponseEntity<Page<ClientDto>> getClients(@RequestHeader("authorization") String authorization,
+                                                        Pageable pageable){
         return new ResponseEntity<>(userService.findAllClients(pageable), HttpStatus.OK);
     }
 
     @GetMapping("/managers")
     @ApiOperation(value = "get all managers")
     @CheckSecurity(roles = {"ROLE_CLIENT", "ROLE_MANAGER", "ROLE_ADMIN"})
-    public ResponseEntity<Page<ManagerDto>> getManagers(@RequestHeader("Authorization") String authorization,
+    public ResponseEntity<Page<ManagerDto>> getManagers(@RequestHeader("authorization") String authorization,
                                                       Pageable pageable){
         return new ResponseEntity<>(userService.findAllManagers(pageable), HttpStatus.OK);
     }

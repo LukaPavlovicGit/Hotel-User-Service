@@ -24,21 +24,24 @@ public class ClientStatusController {
 
     @GetMapping("/discount/{clientId}")
     @CheckSecurity(roles = {"ROLE_CLIENT", "ROLE_ADMIN"})
-    public ResponseEntity<DiscountDto> getDiscount(@PathVariable("clientId") Long clientId) {
+    public ResponseEntity<DiscountDto> getDiscount(@RequestHeader("authorization") String authorization,
+                                                        @PathVariable("clientId") Long clientId) {
         return new ResponseEntity<>(clientStatusService.findDiscount(clientId), HttpStatus.OK);
     }
 
     @PutMapping("/forbidAccess/{clientId}")
     @ApiOperation(value = "forbid access")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
-    public ResponseEntity<ClientStatusDto> forbidAccess(@PathVariable("clientId") Long clientId){
+    public ResponseEntity<ClientStatusDto> forbidAccess(@RequestHeader("authorization") String authorization,
+                                                            @PathVariable("clientId") Long clientId){
         return new ResponseEntity<>(clientStatusService.forbidAccess(clientId), HttpStatus.OK);
     }
 
     @PutMapping("/allowAccess/{clientId}")
     @ApiOperation(value = "allow access")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
-    public ResponseEntity<ClientStatusDto> allowAccess(@PathVariable("clientId") Long clientId){
+    public ResponseEntity<ClientStatusDto> allowAccess(@RequestHeader("authorization") String authorization,
+                                                            @PathVariable("clientId") Long clientId){
         return new ResponseEntity<>(clientStatusService.allowAccess(clientId), HttpStatus.OK);
     }
 }
