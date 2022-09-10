@@ -1,6 +1,6 @@
 package com.raf.example.HotelUserService.secutiry;
 
-import com.raf.example.HotelUserService.service.tokenService.service.TokenService;
+import com.raf.example.HotelUserService.secutiry.tokenService.TokenService;
 import io.jsonwebtoken.Claims;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -51,10 +51,12 @@ public class SecurityAspect {
                 }
             }
         }
+
         //If token is not presents return UNAUTHORIZED response
         if (token == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
+
         //Try to parse token
         Claims claims = tokenService.parseToken(token);
         //If fails return UNAUTHORIZED response

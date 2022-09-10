@@ -25,11 +25,14 @@ public class TestDataRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        clientStatusRepository.deleteAll();
+        userRepository.deleteAll();
+        roleRepository.deleteAll();
         //Insert roles
-        Role roleUser = new Role("ROLE_USER");
+        Role roleClient = new Role("ROLE_CLIENT");
         Role roleAdmin = new Role("ROLE_ADMIN");
         Role roleManager = new Role("ROLE_MANAGER");
-        roleRepository.save(roleUser);
+        roleRepository.save(roleClient);
         roleRepository.save(roleAdmin);
         roleRepository.save(roleManager);
         //Insert admin
@@ -44,6 +47,8 @@ public class TestDataRunner implements CommandLineRunner {
         admin.setRole(roleAdmin);
 
         Client u1 = new Client();
+        //eyJhbGciOiJIUzUxMiJ9.eyJpZCI6Miwicm9sZSI6IlJPTEVfVVNFUiJ9.RA-Weml4f3pt9sTFnG58M5KyJDbp9hEa-1VPcuZ_UFNWS56eJrN-23Xj28kfF0DXKoxK6rsgReYtjuRIddQPDw
+        //eyJhbGciOiJIUzUxMiJ9.eyJpZCI6Miwicm9sZSI6IlJPTEVfVVNFUiJ9.RA-Weml4f3pt9sTFnG58M5KyJDbp9hEa-1VPcuZ_UFNWS56eJrN-23Xj28kfF0DXKoxK6rsgReYtjuRIddQPDw
         u1.setEmail("u1@gmail.com");
         u1.setUsername("u1");
         u1.setPassword("u1");
@@ -51,10 +56,11 @@ public class TestDataRunner implements CommandLineRunner {
         u1.setLastName("Pavlovic2323");
         u1.setPhoneNumber("0641234567");
         u1.setBirthdate(new Date());
-        u1.setRole(roleUser);
+        u1.setRole(roleClient);
         u1.setNumOfPassport("123553431");
 
         Client u2 = new Client();
+        //eyJhbGciOiJIUzUxMiJ9.eyJpZCI6Mywicm9sZSI6IlJPTEVfVVNFUiJ9.XNw7kEEkizwJjQh2vDGuysnz_mvMs423VkERFMWj4z-HX-NQhfIjwAoZdJpuhzxtrmNjlWa1odIGHQ8H2ONS_A
         u2.setEmail("u2@gmail.com");
         u2.setUsername("u2");
         u2.setPassword("u2");
@@ -62,7 +68,7 @@ public class TestDataRunner implements CommandLineRunner {
         u2.setLastName("Pavlovicwwww");
         u2.setPhoneNumber("0641234567");
         u2.setBirthdate(new Date());
-        u2.setRole(roleUser);
+        u2.setRole(roleClient);
         u2.setNumOfPassport("33255123");
 
         Manager u3 = new Manager();
