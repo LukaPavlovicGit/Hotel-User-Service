@@ -1,6 +1,6 @@
 package com.raf.example.HotelUserService.rank;
 
-public enum Rank {
+public enum RankEnum {
     GOLD,
     SILVER,
     BRONZE

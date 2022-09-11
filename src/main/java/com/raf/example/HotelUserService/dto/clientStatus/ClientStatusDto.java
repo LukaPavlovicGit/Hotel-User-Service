@@ -1,13 +1,13 @@
 package com.raf.example.HotelUserService.dto.clientStatus;
 
-import com.raf.example.HotelUserService.rank.Rank;
+import com.raf.example.HotelUserService.rank.RankEnum;
 
 public class ClientStatusDto {
 
     private Long userId;
     private Boolean accessForbidden;
     private Integer discount;
-    private Rank rank;
+    private RankEnum rankEnum;
 
     public Long getUserId() {
         return userId;
@@ -33,11 +33,11 @@ public class ClientStatusDto {
         this.discount = discount;
     }
 
-    public Rank getRank() {
-        return rank;
+    public RankEnum getRank() {
+        return rankEnum;
     }
 
-    public void setRank(Rank rank) {
-        this.rank = rank;
+    public void setRank(RankEnum rankEnum) {
+        this.rankEnum = rankEnum;
     }
 }

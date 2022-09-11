@@ -1,6 +1,7 @@
 package com.raf.example.HotelUserService.runner;
 import com.raf.example.HotelUserService.domain.*;
 import com.raf.example.HotelUserService.repository.ClientStatusRepository;
+import com.raf.example.HotelUserService.repository.RankRepository;
 import com.raf.example.HotelUserService.repository.RoleRepository;
 import com.raf.example.HotelUserService.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -16,11 +17,13 @@ public class TestDataRunner implements CommandLineRunner {
     private RoleRepository roleRepository;
     private UserRepository userRepository;
     private ClientStatusRepository clientStatusRepository;
+    private RankRepository rankRepository;
 
-    public TestDataRunner(RoleRepository roleRepository, UserRepository userRepository, ClientStatusRepository clientStatusRepository) {
+    public TestDataRunner(RoleRepository roleRepository, UserRepository userRepository, ClientStatusRepository clientStatusRepository, RankRepository rankRepository) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
         this.clientStatusRepository = clientStatusRepository;
+        this.rankRepository = rankRepository;
     }
 
     @Override
@@ -28,6 +31,15 @@ public class TestDataRunner implements CommandLineRunner {
         clientStatusRepository.deleteAll();
         userRepository.deleteAll();
         roleRepository.deleteAll();
+        rankRepository.deleteAll();
+
+        Rank bronze = new Rank("BRONZE", 3);
+        Rank silver = new Rank("SILVER", 6);
+        Rank gold = new Rank("GOLD", 10);
+        rankRepository.save(bronze);
+        rankRepository.save(silver);
+        rankRepository.save(gold);
+
         //Insert roles
         Role roleClient = new Role("ROLE_CLIENT");
         Role roleAdmin = new Role("ROLE_ADMIN");
@@ -98,10 +110,13 @@ public class TestDataRunner implements CommandLineRunner {
         userRepository.save(m1);
         userRepository.save(m2);
 
-        ClientStatus k1Status = new ClientStatus(c1.getId());
-        ClientStatus k2Status = new ClientStatus(c2.getId());
+        ClientStatus k1Status = new ClientStatus(c1.getId(), bronze);
+        ClientStatus k2Status = new ClientStatus(c2.getId(), bronze);
 
         clientStatusRepository.save(k1Status);
         clientStatusRepository.save(k2Status);
+
+
+
     }
 }

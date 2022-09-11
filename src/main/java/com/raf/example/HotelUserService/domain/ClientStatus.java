@@ -1,5 +1,4 @@
 package com.raf.example.HotelUserService.domain;
-import com.raf.example.HotelUserService.rank.Rank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -7,7 +6,6 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(indexes = {@Index(columnList = "userId", unique = true)})
 public class ClientStatus {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,19 +13,17 @@ public class ClientStatus {
     private Long userId;
     private Boolean accessForbidden;
     private Integer discount;
+
+    @OneToOne
     private Rank rank;
 
-    public ClientStatus(){
-        this.accessForbidden = false;
-        this.discount = 0;
-        this.rank = Rank.BRONZE;
-    }
+    public ClientStatus(){ }
 
-    public ClientStatus(Long userId) {
+    public ClientStatus(Long userId, Rank rank) {
         this.userId = userId;
+        this.rank = rank;
         this.accessForbidden = false;
         this.discount = 0;
-        this.rank = Rank.BRONZE;
     }
 
     public Long getId() {
