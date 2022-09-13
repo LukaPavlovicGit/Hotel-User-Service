@@ -1,4 +1,4 @@
-package com.raf.example.HotelUserService.dto.discount;
+package com.raf.example.HotelUserService.dto;
 
 public class DiscountDto {
     private Integer discount;

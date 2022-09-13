@@ -1,7 +1,7 @@
 package com.raf.example.HotelUserService.service.clientStatusService;
 
-import com.raf.example.HotelUserService.dto.clientStatus.ClientStatusDto;
-import com.raf.example.HotelUserService.dto.discount.DiscountDto;
+import com.raf.example.HotelUserService.dto.ClientStatusDto;
+import com.raf.example.HotelUserService.dto.DiscountDto;
 
 public interface ClientStatusService {
 

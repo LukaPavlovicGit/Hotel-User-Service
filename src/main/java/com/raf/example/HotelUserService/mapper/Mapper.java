@@ -4,15 +4,11 @@ import com.raf.example.HotelUserService.domain.Client;
 import com.raf.example.HotelUserService.domain.ClientStatus;
 import com.raf.example.HotelUserService.domain.Manager;
 import com.raf.example.HotelUserService.domain.User;
-import com.raf.example.HotelUserService.dto.clientStatus.ClientStatusDto;
+import com.raf.example.HotelUserService.dto.ClientStatusDto;
 import com.raf.example.HotelUserService.dto.user.*;
-import lombok.Getter;
-import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-@Getter
-@Setter
 
 @Component
 public class Mapper {
@@ -27,6 +23,15 @@ public class Mapper {
         userDto = modelMapper.map(user, UserDto.class);
         return userDto;
     }
+
+    public UserDto userDtoToUser(UserDto userDto){
+        User user = new User();
+        user = modelMapper.map(userDto, User.class);
+        System.out.println(user.toString());
+        return userDto;
+    }
+
+
 
     public Client clientCreateDtoToClient(ClientCreateDto clientCreateDto){
         Client client = new Client();

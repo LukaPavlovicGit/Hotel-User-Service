@@ -1,6 +1,6 @@
-package com.raf.example.HotelUserService.dto.clientStatus;
+package com.raf.example.HotelUserService.dto;
 
-import com.raf.example.HotelUserService.rank.RankEnum;
+import com.raf.example.HotelUserService.domain.rank.RankEnum;
 
 public class ClientStatusDto {
 

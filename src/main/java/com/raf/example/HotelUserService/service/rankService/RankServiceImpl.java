@@ -1,7 +1,7 @@
 package com.raf.example.HotelUserService.service.rankService;
 
 import com.raf.example.HotelUserService.domain.Rank;
-import com.raf.example.HotelUserService.dto.rankDto.RankDto;
+import com.raf.example.HotelUserService.dto.RankDto;
 import com.raf.example.HotelUserService.exception.NotFoundException;
 import com.raf.example.HotelUserService.exception.OperationNotAllowed;
 import com.raf.example.HotelUserService.repository.RankRepository;

@@ -1,11 +1,7 @@
 package com.raf.example.HotelUserService.controller;
 
-import com.raf.example.HotelUserService.domain.ClientStatus;
-import com.raf.example.HotelUserService.dto.clientStatus.ClientStatusDto;
-import com.raf.example.HotelUserService.dto.discount.DiscountDto;
-import com.raf.example.HotelUserService.dto.user.UserDto;
-import com.raf.example.HotelUserService.dto.userFields.UsernameDto;
-import com.raf.example.HotelUserService.mapper.Mapper;
+import com.raf.example.HotelUserService.dto.ClientStatusDto;
+import com.raf.example.HotelUserService.dto.DiscountDto;
 import com.raf.example.HotelUserService.secutiry.CheckSecurity;
 import com.raf.example.HotelUserService.service.clientStatusService.ClientStatusService;
 import io.swagger.annotations.ApiOperation;

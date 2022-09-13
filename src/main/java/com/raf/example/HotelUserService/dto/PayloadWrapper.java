@@ -1,4 +1,4 @@
-package com.raf.example.HotelUserService.payload;
+package com.raf.example.HotelUserService.dto;
 
 public class PayloadWrapper {
     private Long id;

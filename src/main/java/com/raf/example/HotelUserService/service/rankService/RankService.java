@@ -1,6 +1,6 @@
 package com.raf.example.HotelUserService.service.rankService;
 
-import com.raf.example.HotelUserService.dto.rankDto.RankDto;
+import com.raf.example.HotelUserService.dto.RankDto;
 
 public interface RankService {
 

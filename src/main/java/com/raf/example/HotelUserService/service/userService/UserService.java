@@ -1,7 +1,5 @@
 package com.raf.example.HotelUserService.service.userService;
 
-import com.raf.example.HotelUserService.dto.clientStatus.ClientStatusDto;
-import com.raf.example.HotelUserService.dto.discount.DiscountDto;
 import com.raf.example.HotelUserService.dto.token.TokenRequestDto;
 import com.raf.example.HotelUserService.dto.token.TokenResponseDto;
 import com.raf.example.HotelUserService.dto.user.*;

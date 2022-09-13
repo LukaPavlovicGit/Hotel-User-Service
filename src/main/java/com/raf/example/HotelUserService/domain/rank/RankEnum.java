@@ -1,4 +1,4 @@
-package com.raf.example.HotelUserService.rank;
+package com.raf.example.HotelUserService.domain.rank;
 
 public enum RankEnum {
     GOLD,

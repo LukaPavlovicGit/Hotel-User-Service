@@ -1,19 +1,23 @@
 package com.raf.example.HotelUserService.dto.user;
 
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+
 public class UserDto {
-    private Long id;
     private String username;
-    private String email;
+
+    private String password;
+
     private String firstName;
+
     private String lastName;
 
-    public Long getId() {
-        return id;
-    }
+    private String email;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String phoneNumber;
+
+    private Date birthdate;
+
 
     public String getUsername() {
         return username;
@@ -45,5 +49,42 @@ public class UserDto {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", birthdate=" + birthdate +
+                '}';
     }
 }

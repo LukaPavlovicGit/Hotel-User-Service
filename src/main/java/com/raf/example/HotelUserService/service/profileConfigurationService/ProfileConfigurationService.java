@@ -5,14 +5,14 @@ import com.raf.example.HotelUserService.dto.userFields.*;
 
 public interface ProfileConfigurationService {
 
-    UserDto changeUsername(String token, UsernameDto usernameDto);
-    UserDto changePassword(String token, PasswordDto passwordDto);
-    UserDto changeFirstName(String token, FirstnameDto firstnameDto);
-    UserDto changeLastName(String token, LastnameDto lastnameDto);
-    UserDto changeEmail(String token, EmailDto emailDto);
-    UserDto changePhoneNumber(String token, PhoneNumberDto phoneNumberDto);
-    UserDto changeBirthday(String token, BirthdateDto birthdateDto);
-    ClientDto changeNumOfPassport(String token, PassportNumDto passportNumDto);
+    UserDto changeUsername(Long userId, UsernameDto usernameDto);
+    UserDto changePassword(Long userId, PasswordDto passwordDto);
+    UserDto changeFirstName(Long userId, FirstnameDto firstnameDto);
+    UserDto changeLastName(Long userId, LastnameDto lastnameDto);
+    UserDto changeEmail(Long userId, EmailDto emailDto);
+    UserDto changePhoneNumber(Long userId, PhoneNumberDto phoneNumberDto);
+    UserDto changeBirthday(Long userId, BirthdateDto birthdateDto);
+    ClientDto changeNumOfPassport(Long userId, PassportNumDto passportNumDto);
 }
 /*
     @NotNull

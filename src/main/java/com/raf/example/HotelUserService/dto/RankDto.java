@@ -1,4 +1,4 @@
-package com.raf.example.HotelUserService.dto.rankDto;
+package com.raf.example.HotelUserService.dto;
 
 import javax.validation.constraints.NotBlank;
 

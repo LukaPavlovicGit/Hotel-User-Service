@@ -1,6 +1,6 @@
 package com.raf.example.HotelUserService.controller;
 
-import com.raf.example.HotelUserService.dto.rankDto.RankDto;
+import com.raf.example.HotelUserService.dto.RankDto;
 import com.raf.example.HotelUserService.secutiry.CheckSecurity;
 import com.raf.example.HotelUserService.service.rankService.RankService;
 import io.swagger.annotations.ApiOperation;
