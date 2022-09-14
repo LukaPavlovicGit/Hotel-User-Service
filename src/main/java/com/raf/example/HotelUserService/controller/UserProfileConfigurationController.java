@@ -3,7 +3,6 @@ package com.raf.example.HotelUserService.controller;
 import com.raf.example.HotelUserService.dto.user.ClientDto;
 import com.raf.example.HotelUserService.dto.user.ManagerDto;
 import com.raf.example.HotelUserService.dto.user.UserDto;
-import com.raf.example.HotelUserService.dto.userFields.*;
 import com.raf.example.HotelUserService.secutiry.CheckSecurity;
 import com.raf.example.HotelUserService.secutiry.SecurityAspect;
 import com.raf.example.HotelUserService.service.profileConfigurationService.ProfileConfigurationService;

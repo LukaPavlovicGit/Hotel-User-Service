@@ -4,6 +4,8 @@ import java.util.Date;
 
 
 public class ManagerDto {
+
+    private Long id;
     private String fistName;
     private String lastName;
     private String email;
@@ -11,6 +13,15 @@ public class ManagerDto {
     private Date birthdate;
     private String hotelName;
     private Date hireDate;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getFistName() {
         return fistName;

@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class ClientDto {
 
+    private Long id;
     private String username;
     private String password;
     private String firstName;
@@ -17,6 +18,15 @@ public class ClientDto {
     private Integer numOfReservation;
 
     public ClientDto(){}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 
     public String getUsername() {
         return username;
