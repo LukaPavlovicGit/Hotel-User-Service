@@ -1,6 +1,7 @@
 package com.raf.example.HotelUserService.controller;
 
 import com.raf.example.HotelUserService.dto.user.ClientDto;
+import com.raf.example.HotelUserService.dto.user.ManagerDto;
 import com.raf.example.HotelUserService.dto.user.UserDto;
 import com.raf.example.HotelUserService.dto.userFields.*;
 import com.raf.example.HotelUserService.secutiry.CheckSecurity;
@@ -21,68 +22,31 @@ public class UserProfileConfigurationController {
         this.profileConfigurationService = profileConfigurationService;
         this.securityAspect = securityAspect;
     }
-
-    @PutMapping("/changeUsername")
-    @ApiOperation(value = "change username")
-    @CheckSecurity(roles = {"ROLE_CLIENT", "ROLE_MANAGER", "ROLE_ADMIN"})
-    public ResponseEntity<UserDto> changeUsername(@RequestHeader("authorization") String authorization, UsernameDto usernameDto){
-        Long userId = securityAspect.getUserId(authorization);
-        return new ResponseEntity<>(profileConfigurationService.changeUsername(userId, usernameDto), HttpStatus.OK);
-    }
-
-    @PutMapping("/changePassword")
-    @ApiOperation(value = "change password")
-    @CheckSecurity(roles = {"ROLE_CLIENT", "ROLE_MANAGER", "ROLE_ADMIN"})
-    public ResponseEntity<UserDto> changePassword(@RequestHeader("authorization") String authorization, PasswordDto passwordDto){
-        Long userId = securityAspect.getUserId(authorization);
-        return new ResponseEntity<>(profileConfigurationService.changePassword(userId, passwordDto), HttpStatus.OK);
-    }
-
-    @PutMapping("/changeFirstname")
-    @ApiOperation(value = "change firstname")
-    @CheckSecurity(roles = {"ROLE_CLIENT", "ROLE_MANAGER", "ROLE_ADMIN"})
-    public ResponseEntity<UserDto> changeFirstName(@RequestHeader("authorization") String authorization, FirstnameDto firstnameDto){
-        Long userId = securityAspect.getUserId(authorization);
-        return new ResponseEntity<>(profileConfigurationService.changeFirstName(userId, firstnameDto), HttpStatus.OK);
-    }
-
-    @PutMapping("/changeLastname")
-    @ApiOperation(value = "change lastname")
-    @CheckSecurity(roles = {"ROLE_CLIENT", "ROLE_MANAGER", "ROLE_ADMIN"})
-    public ResponseEntity<UserDto> changeLastName(@RequestHeader("authorization") String authorization, LastnameDto lastnameDto){
-        Long userId = securityAspect.getUserId(authorization);
-        return new ResponseEntity<>(profileConfigurationService.changeLastName(userId, lastnameDto), HttpStatus.OK);
-    }
-
-    @PutMapping("/changeEmail")
-    @ApiOperation(value = "change email")
-    @CheckSecurity(roles = {"ROLE_CLIENT", "ROLE_MANAGER", "ROLE_ADMIN"})
-    public ResponseEntity<UserDto> changeEmail(@RequestHeader("authorization") String authorization, EmailDto emailDto){
-        Long userId = securityAspect.getUserId(authorization);
-        return new ResponseEntity<>(profileConfigurationService.changeEmail(userId, emailDto), HttpStatus.OK);
-    }
-
-    @PutMapping("/changePhoneNumber")
-    @ApiOperation(value = "change phone number")
-    @CheckSecurity(roles = {"ROLE_CLIENT", "ROLE_MANAGER", "ROLE_ADMIN"})
-    public ResponseEntity<UserDto> changePhoneNumber(@RequestHeader("authorization") String authorization, PhoneNumberDto phoneNumberDto){
-        Long userId = securityAspect.getUserId(authorization);
-        return new ResponseEntity<>(profileConfigurationService.changePhoneNumber(userId, phoneNumberDto), HttpStatus.OK);
-    }
-
-    @PutMapping("/changeBirthdate")
-    @ApiOperation(value = "change birthdate")
-    @CheckSecurity(roles = {"ROLE_CLIENT", "ROLE_MANAGER", "ROLE_ADMIN"})
-    public ResponseEntity<UserDto> changeBirthdate(@RequestHeader("authorization") String authorization, BirthdateDto birthdateDto){
-        Long userId = securityAspect.getUserId(authorization);
-        return new ResponseEntity<>(profileConfigurationService.changeBirthday(userId, birthdateDto), HttpStatus.OK);
-    }
-
-    @PutMapping("/changePassportNumber")
-    @ApiOperation(value = "change passport number")
+    @PutMapping("/updateClient")
+    @ApiOperation(value = "client update")
     @CheckSecurity(roles = {"ROLE_CLIENT"})
-    public ResponseEntity<ClientDto> changeNumOfPassport(@RequestHeader("authorization") String authorization, PassportNumDto passportNumDto){
-        Long userId = securityAspect.getUserId(authorization);
-        return new ResponseEntity<>(profileConfigurationService.changeNumOfPassport(userId, passportNumDto), HttpStatus.OK);
+    public ResponseEntity<ClientDto> updateClient(@RequestHeader("authorization") String authorization,
+                                                     @RequestBody ClientDto clientDto){
+        Long clientId = securityAspect.getUserId(authorization);
+        return new ResponseEntity<>(profileConfigurationService.updateClient(clientId, clientDto), HttpStatus.OK);
     }
+
+    @PutMapping("/updateManager")
+    @ApiOperation(value = "manager update")
+    @CheckSecurity(roles = {"ROLE_MANAGER"})
+    public ResponseEntity<ManagerDto> updateManager(@RequestHeader("authorization") String authorization,
+                                                        @RequestBody ManagerDto managerDto){
+        Long managerId = securityAspect.getUserId(authorization);
+        return new ResponseEntity<>(profileConfigurationService.updateManager(managerId, managerDto), HttpStatus.OK);
+    }
+
+    @PutMapping("/updateAdmin")
+    @ApiOperation(value = "admin update")
+    @CheckSecurity(roles = {"ROLE_ADMIN"})
+    public ResponseEntity<UserDto> adminUpdate(@RequestHeader("authorization") String authorization,
+                                                    @RequestBody UserDto userDto){
+        Long userId = securityAspect.getUserId(authorization);
+        return new ResponseEntity<>(profileConfigurationService.updateAdmin(userId, userDto), HttpStatus.OK);
+    }
+
 }

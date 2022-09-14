@@ -24,18 +24,21 @@ public class Mapper {
         return userDto;
     }
 
-    public UserDto userDtoToUser(UserDto userDto){
+    public User userDtoToUser(UserDto userDto){
         User user = new User();
         user = modelMapper.map(userDto, User.class);
-        System.out.println(user.toString());
-        return userDto;
+        return user;
     }
-
-
 
     public Client clientCreateDtoToClient(ClientCreateDto clientCreateDto){
         Client client = new Client();
         client = modelMapper.map(clientCreateDto, Client.class);
+        return client;
+    }
+
+    public Client clientDtoToClient(ClientDto clientDto){
+        Client client = new Client();
+        client = modelMapper.map(clientDto, Client.class);
         return client;
     }
 
@@ -48,6 +51,12 @@ public class Mapper {
     public Manager managerCreateDtoToManager(ManagerCreateDto managerCreateDto){
         Manager manager = new Manager();
         manager = modelMapper.map(managerCreateDto, Manager.class);
+        return manager;
+    }
+
+    public Manager managerDtoToClient(ManagerDto managerDto){
+        Manager manager = new Manager();
+        manager = modelMapper.map(managerDto, Manager.class);
         return manager;
     }
 

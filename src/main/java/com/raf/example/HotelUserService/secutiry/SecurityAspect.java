@@ -85,7 +85,6 @@ public class SecurityAspect {
         String decodedJSON = new String(decoder.decode(payload));
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         PayloadWrapper payloadWrapper = gson.fromJson(decodedJSON, PayloadWrapper.class);
-        System.out.println("ASDADASDasd");
         return payloadWrapper.getId();
     }
 

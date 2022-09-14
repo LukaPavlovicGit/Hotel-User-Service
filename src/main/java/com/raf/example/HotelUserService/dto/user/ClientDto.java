@@ -3,48 +3,76 @@ package com.raf.example.HotelUserService.dto.user;
 import java.util.Date;
 
 
-public class ClientDto extends UserDto {
+public class ClientDto {
+
+    private String username;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
+    private Date birthdate;
+
     private String numOfPassport;
     private Integer numOfReservation;
 
     public ClientDto(){}
 
-
-    public String getFistName() {
-        return super.getFirstName();
+    public String getUsername() {
+        return username;
     }
 
-    public void setFistName(String fistName) {
-        super.setFirstName(fistName);
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
-        return super.getLastName();
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        super.setLastName(lastName);
+        this.lastName = lastName;
     }
 
-    public String getEmail() { return super.getEmail(); }
+    public String getEmail() {
+        return email;
+    }
 
     public void setEmail(String email) {
-        super.setEmail(email);
+        this.email = email;
     }
 
     public String getPhoneNumber() {
-        return super.getPhoneNumber();
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        super.setPhoneNumber(phoneNumber);
+        this.phoneNumber = phoneNumber;
     }
 
     public Date getBirthdate() {
-        return super.getBirthdate();
+        return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) { super.setBirthdate(birthdate); }
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
 
     public String getNumOfPassport() {
         return numOfPassport;
