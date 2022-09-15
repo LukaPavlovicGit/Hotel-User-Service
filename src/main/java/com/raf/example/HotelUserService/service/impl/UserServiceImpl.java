@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -152,8 +153,29 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ClientDto incrementNumberOfReservation(IncrementReservationDto incrementReservationDto) {
-        System.out.println("successful");
-        return null;
+
+        Client client = (Client) userRepository.findById(incrementReservationDto.getUserId()).get();
+        client.setNumOfReservation(client.getNumOfReservation() + 1);
+        userRepository.save(client);
+
+        Integer numberOfReservation = client.getNumOfReservation();
+        ClientStatus clientStatus = clientStatusRepository.findClientStatusByUserId(client.getId()).get();
+        List<Rank> ranks = rankRepository.findAll();
+        Collections.sort(ranks, (o1, o2) -> o1.getReach() - o2.getReach());
+
+        int lowerBound = 0, upperBound = 0;
+        for(int i=0 ; i<ranks.size() ; i++){
+            upperBound = ranks.get(i).getReach();
+
+            if(numberOfReservation >= lowerBound && numberOfReservation < upperBound || i == ranks.size() - 1) {
+                clientStatus.setRank(ranks.get(i));
+                clientStatusRepository.save(clientStatus);
+                break;
+            }
+            lowerBound = upperBound;
+        }
+
+        return mapper.clientToClientDto(client);
     }
 
 

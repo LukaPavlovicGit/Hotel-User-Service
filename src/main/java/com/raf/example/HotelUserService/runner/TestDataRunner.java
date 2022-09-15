@@ -35,7 +35,7 @@ public class TestDataRunner implements CommandLineRunner {
 
         Rank bronze = new Rank("BRONZE", 3);
         Rank silver = new Rank("SILVER", 6);
-        Rank gold = new Rank("GOLD", 10);
+        Rank gold = new Rank("GOLD", -1);
         rankRepository.save(bronze);
         rankRepository.save(silver);
         rankRepository.save(gold);

@@ -22,8 +22,7 @@ public class MessageListener {
 
    @JmsListener(destination = "increment_queue", concurrency = "5-10")
     public void addOrder(Message message) throws JMSException {
-        //IncrementReservationDto dto = messageHelper.getMessage(message, IncrementReservationDto.class);
-
+        IncrementReservationDto dto = messageHelper.getMessage(message, IncrementReservationDto.class);
         userService.incrementNumberOfReservation(new IncrementReservationDto());
     }
 }
