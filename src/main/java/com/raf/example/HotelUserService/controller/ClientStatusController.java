@@ -3,7 +3,7 @@ package com.raf.example.HotelUserService.controller;
 import com.raf.example.HotelUserService.dto.ClientStatusDto;
 import com.raf.example.HotelUserService.dto.DiscountDto;
 import com.raf.example.HotelUserService.secutiry.CheckSecurity;
-import com.raf.example.HotelUserService.service.clientStatusService.ClientStatusService;
+import com.raf.example.HotelUserService.service.ClientStatusService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

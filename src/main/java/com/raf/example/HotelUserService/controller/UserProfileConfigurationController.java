@@ -5,7 +5,7 @@ import com.raf.example.HotelUserService.dto.user.ManagerDto;
 import com.raf.example.HotelUserService.dto.user.UserDto;
 import com.raf.example.HotelUserService.secutiry.CheckSecurity;
 import com.raf.example.HotelUserService.secutiry.SecurityAspect;
-import com.raf.example.HotelUserService.service.profileConfigurationService.ProfileConfigurationService;
+import com.raf.example.HotelUserService.service.ProfileConfigurationService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

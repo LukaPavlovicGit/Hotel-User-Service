@@ -2,7 +2,7 @@ package com.raf.example.HotelUserService.controller;
 
 import com.raf.example.HotelUserService.dto.RankDto;
 import com.raf.example.HotelUserService.secutiry.CheckSecurity;
-import com.raf.example.HotelUserService.service.rankService.RankService;
+import com.raf.example.HotelUserService.service.RankService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

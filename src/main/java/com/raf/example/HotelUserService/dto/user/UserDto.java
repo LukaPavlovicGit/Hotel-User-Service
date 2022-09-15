@@ -1,6 +1,5 @@
 package com.raf.example.HotelUserService.dto.user;
 
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class UserDto {

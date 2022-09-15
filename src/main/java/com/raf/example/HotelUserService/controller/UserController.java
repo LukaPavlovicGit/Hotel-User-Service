@@ -4,7 +4,7 @@ import com.raf.example.HotelUserService.dto.token.TokenRequestDto;
 import com.raf.example.HotelUserService.dto.token.TokenResponseDto;
 import com.raf.example.HotelUserService.dto.user.*;
 import com.raf.example.HotelUserService.secutiry.CheckSecurity;
-import com.raf.example.HotelUserService.service.userService.UserService;
+import com.raf.example.HotelUserService.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -82,4 +82,6 @@ public class UserController {
     public ResponseEntity<TokenResponseDto> login(@RequestBody @Valid TokenRequestDto tokenRequestDto) {
         return new ResponseEntity<>(userService.login(tokenRequestDto), HttpStatus.OK);
     }
+
+
 }
