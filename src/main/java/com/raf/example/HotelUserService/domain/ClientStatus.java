@@ -13,7 +13,6 @@ public class ClientStatus {
     private Long userId;
     private Boolean accessForbidden;
     private Integer discount;
-
     @OneToOne
     private Rank rank;
 

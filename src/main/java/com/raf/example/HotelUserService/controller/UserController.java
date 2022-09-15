@@ -1,5 +1,6 @@
 package com.raf.example.HotelUserService.controller;
 
+import com.raf.example.HotelUserService.dto.DiscountDto;
 import com.raf.example.HotelUserService.dto.token.TokenRequestDto;
 import com.raf.example.HotelUserService.dto.token.TokenResponseDto;
 import com.raf.example.HotelUserService.dto.user.*;
@@ -83,5 +84,8 @@ public class UserController {
         return new ResponseEntity<>(userService.login(tokenRequestDto), HttpStatus.OK);
     }
 
-
+    @GetMapping("/{id}/discount")
+    public ResponseEntity<DiscountDto> getDiscount(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(userService.getDiscount(id), HttpStatus.OK);
+    }
 }

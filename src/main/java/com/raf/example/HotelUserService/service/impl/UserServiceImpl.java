@@ -2,6 +2,7 @@ package com.raf.example.HotelUserService.service.impl;
 
 import com.raf.example.HotelUserService.domain.*;
 import com.raf.example.HotelUserService.dto.ClientIdDto;
+import com.raf.example.HotelUserService.dto.DiscountDto;
 import com.raf.example.HotelUserService.dto.IncrementReservationDto;
 import com.raf.example.HotelUserService.dto.token.TokenRequestDto;
 import com.raf.example.HotelUserService.dto.token.TokenResponseDto;
@@ -10,6 +11,7 @@ import com.raf.example.HotelUserService.exception.AccessForbidden;
 import com.raf.example.HotelUserService.exception.NotFoundException;
 import com.raf.example.HotelUserService.mapper.Mapper;
 import com.raf.example.HotelUserService.repository.ClientStatusRepository;
+import com.raf.example.HotelUserService.repository.RankRepository;
 import com.raf.example.HotelUserService.repository.RoleRepository;
 import com.raf.example.HotelUserService.repository.UserRepository;
 import com.raf.example.HotelUserService.secutiry.tokenService.TokenService;
@@ -34,18 +36,18 @@ public class UserServiceImpl implements UserService {
     private TokenService tokenService;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
-
     private ClientStatusRepository clientStatusRepository;
-
+    private RankRepository rankRepository;
     private Mapper mapper;
     private JmsTemplate jmsTemplate; // injectuj preko konstruktora
 
-    public UserServiceImpl(UserRepository userRepository, TokenService tokenService, RoleRepository roleRepository,
-                                ClientStatusRepository clientStatusRepository, Mapper mapper, JmsTemplate jmsTemplate) {
-        this.userRepository = userRepository;
+    public UserServiceImpl(TokenService tokenService, UserRepository userRepository, RoleRepository roleRepository,
+                           ClientStatusRepository clientStatusRepository, RankRepository rankRepository, Mapper mapper, JmsTemplate jmsTemplate) {
         this.tokenService = tokenService;
+        this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.clientStatusRepository = clientStatusRepository;
+        this.rankRepository = rankRepository;
         this.mapper = mapper;
         this.jmsTemplate = jmsTemplate;
     }
@@ -93,9 +95,15 @@ public class UserServiceImpl implements UserService {
     public ClientDto addClient(ClientCreateDto clientCreateDto) {
         Role role = roleRepository.findRoleByName("ROLE_CLIENT")
                 .orElseThrow(() -> new NotFoundException("Role with name: ROLE_CLIENT not found."));
+
         Client client = mapper.clientCreateDtoToClient(clientCreateDto);
         client.setRole(role);
         userRepository.save(client);
+
+        Rank rank = rankRepository.findByName("BRONZE").orElseThrow(() -> new NotFoundException(""));
+        ClientStatus clientStatus = new ClientStatus(client.getId(), rank);
+        clientStatusRepository.save(clientStatus);
+
         return mapper.clientToClientDto(client);
     }
 
@@ -130,8 +138,16 @@ public class UserServiceImpl implements UserService {
         Claims claims = Jwts.claims();
         claims.put("id", user.getId());
         claims.put("role", user.getRole().getName());
+        claims.put("email", user.getEmail());
+        System.out.println(claims.get("email"));
         //Generate token
         return new TokenResponseDto(tokenService.generate(claims));
+    }
+
+    @Override
+    public DiscountDto getDiscount(Long userId) {
+        ClientStatus clientStatus = clientStatusRepository.findClientStatusByUserId(userId).orElseThrow(() -> new NotFoundException(""));
+        return new DiscountDto(clientStatus.getDiscount());
     }
 
     @Override

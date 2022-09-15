@@ -3,6 +3,8 @@ package com.raf.example.HotelUserService.dto;
 public class DiscountDto {
     private Integer discount;
 
+    public DiscountDto(){}
+
     public DiscountDto(Integer discount){
         this.discount = discount;
     }

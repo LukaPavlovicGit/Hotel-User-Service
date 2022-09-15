@@ -1,6 +1,7 @@
 package com.raf.example.HotelUserService.service;
 
 import com.raf.example.HotelUserService.dto.ClientIdDto;
+import com.raf.example.HotelUserService.dto.DiscountDto;
 import com.raf.example.HotelUserService.dto.IncrementReservationDto;
 import com.raf.example.HotelUserService.dto.token.TokenRequestDto;
 import com.raf.example.HotelUserService.dto.token.TokenResponseDto;
@@ -23,6 +24,8 @@ public interface UserService {
     ManagerDto addManager(ManagerCreateDto managerCreateDto);
 
     TokenResponseDto login(TokenRequestDto tokenRequestDto);
+
+    DiscountDto getDiscount(Long userId);
 
     ClientDto incrementNumberOfReservation(IncrementReservationDto incrementReservationDto);
 
