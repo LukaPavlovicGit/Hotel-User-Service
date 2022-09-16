@@ -155,7 +155,11 @@ public class UserServiceImpl implements UserService {
     public ClientDto incrementNumberOfReservation(IncrementReservationDto incrementReservationDto) {
 
         Client client = (Client) userRepository.findById(incrementReservationDto.getUserId()).get();
-        client.setNumOfReservation(client.getNumOfReservation() + 1);
+        if(incrementReservationDto.getIncrement() == true)
+            client.setNumOfReservation(client.getNumOfReservation() + 1);
+        else
+            client.setNumOfReservation(client.getNumOfReservation() - 1);
+
         userRepository.save(client);
 
         Integer numberOfReservation = client.getNumOfReservation();

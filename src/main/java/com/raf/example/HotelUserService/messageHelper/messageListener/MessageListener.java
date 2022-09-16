@@ -1,4 +1,4 @@
-package com.raf.example.HotelUserService.messageListener;
+package com.raf.example.HotelUserService.messageHelper.messageListener;
 import com.raf.example.HotelUserService.dto.ClientIdDto;
 import com.raf.example.HotelUserService.dto.IncrementReservationDto;
 import com.raf.example.HotelUserService.messageHelper.MessageHelper;
@@ -20,10 +20,10 @@ public class MessageListener {
         this.userService = userService;
     }
 
-   @JmsListener(destination = "increment_queue", concurrency = "5-10")
+   @JmsListener(destination = "increment_reservation_queue", concurrency = "5-10")
     public void addOrder(Message message) throws JMSException {
-        IncrementReservationDto dto = messageHelper.getMessage(message, IncrementReservationDto.class);
-        userService.incrementNumberOfReservation(new IncrementReservationDto());
+        IncrementReservationDto incrementReservationDto = messageHelper.getMessage(message, IncrementReservationDto.class);
+        userService.incrementNumberOfReservation(incrementReservationDto);
     }
 }
 
