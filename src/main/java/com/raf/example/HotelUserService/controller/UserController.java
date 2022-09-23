@@ -67,7 +67,7 @@ public class UserController {
     @ApiOperation(value = "client registration")
     public ResponseEntity<ClientDto> registerClient(@RequestHeader("authorization") String authorization,
                                                         @RequestBody @Valid ClientCreateDto clientCreateDto) {
-        return new ResponseEntity<>(userService.addClient(clientCreateDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.save(clientCreateDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/registration/manager")
@@ -75,7 +75,7 @@ public class UserController {
     @ApiOperation(value = "manager registration")
     public ResponseEntity<ManagerDto> registerManager(@RequestHeader("authorization") String authorization,
                                                         @RequestBody @Valid ManagerCreateDto managerCreateDto) {
-        return new ResponseEntity<>(userService.addManager(managerCreateDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.save(managerCreateDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
@@ -87,5 +87,22 @@ public class UserController {
     @GetMapping("/{id}/discount")
     public ResponseEntity<DiscountDto> getDiscount(@PathVariable("id") Long id) {
         return new ResponseEntity<>(userService.getDiscount(id), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Activate account")
+    @GetMapping("/activation/{userId}")
+    public ResponseEntity<Void> activateAccount(@PathVariable("userId") Long userId){
+        userService.activate(userId);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+    @ApiOperation(value = "Increment reservation")
+    @PostMapping("/incrementReservation/{clientId}")
+    public ResponseEntity<ClientDto> incrementReservation(@PathVariable("clientId") Long clientId){
+        return new ResponseEntity<ClientDto>(userService.incrementNumOfReservation(clientId), HttpStatus.OK);
+    }
+    @ApiOperation(value = "Decrement reservation")
+    @PostMapping("/decrementReservation/{clientId}")
+    public ResponseEntity<ClientDto> decrementReservation(@PathVariable("clientId") Long clientId){
+        return new ResponseEntity<ClientDto>(userService.decrementNumOfReservation(clientId), HttpStatus.OK);
     }
 }

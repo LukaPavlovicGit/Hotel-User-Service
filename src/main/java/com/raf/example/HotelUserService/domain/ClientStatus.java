@@ -60,4 +60,5 @@ public class ClientStatus {
     public void setRank(Rank rank) {
         this.rank = rank;
     }
+
 }

@@ -1,15 +1,16 @@
 package com.raf.example.HotelUserService.service.impl;
 
 import com.raf.example.HotelUserService.domain.*;
-import com.raf.example.HotelUserService.dto.ClientIdDto;
 import com.raf.example.HotelUserService.dto.DiscountDto;
 import com.raf.example.HotelUserService.dto.IncrementReservationDto;
+import com.raf.example.HotelUserService.dto.MessageDto;
 import com.raf.example.HotelUserService.dto.token.TokenRequestDto;
 import com.raf.example.HotelUserService.dto.token.TokenResponseDto;
 import com.raf.example.HotelUserService.dto.user.*;
 import com.raf.example.HotelUserService.exception.AccessForbidden;
 import com.raf.example.HotelUserService.exception.NotFoundException;
 import com.raf.example.HotelUserService.mapper.Mapper;
+import com.raf.example.HotelUserService.messageHelper.MessageHelper;
 import com.raf.example.HotelUserService.repository.ClientStatusRepository;
 import com.raf.example.HotelUserService.repository.RankRepository;
 import com.raf.example.HotelUserService.repository.RoleRepository;
@@ -42,8 +43,10 @@ public class UserServiceImpl implements UserService {
     private Mapper mapper;
     private JmsTemplate jmsTemplate; // injectuj preko konstruktora
 
-    public UserServiceImpl(TokenService tokenService, UserRepository userRepository, RoleRepository roleRepository,
-                           ClientStatusRepository clientStatusRepository, RankRepository rankRepository, Mapper mapper, JmsTemplate jmsTemplate) {
+    private MessageHelper messageHelper;
+
+    public UserServiceImpl(TokenService tokenService, UserRepository userRepository, RoleRepository roleRepository, ClientStatusRepository clientStatusRepository,
+                           RankRepository rankRepository, Mapper mapper, JmsTemplate jmsTemplate, MessageHelper messageHelper) {
         this.tokenService = tokenService;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
@@ -51,6 +54,7 @@ public class UserServiceImpl implements UserService {
         this.rankRepository = rankRepository;
         this.mapper = mapper;
         this.jmsTemplate = jmsTemplate;
+        this.messageHelper = messageHelper;
     }
 
     @Override
@@ -92,8 +96,7 @@ public class UserServiceImpl implements UserService {
         return page;
     }
 
-    @Override
-    public ClientDto addClient(ClientCreateDto clientCreateDto) {
+    public ClientDto save(ClientCreateDto clientCreateDto) {
         Role role = roleRepository.findRoleByName("ROLE_CLIENT")
                 .orElseThrow(() -> new NotFoundException("Role with name: ROLE_CLIENT not found."));
 
@@ -105,16 +108,22 @@ public class UserServiceImpl implements UserService {
         ClientStatus clientStatus = new ClientStatus(client.getId(), rank);
         clientStatusRepository.save(clientStatus);
 
+        sendEmail(new MessageDto("account_activation", client.getFirstName(), client.getLastName(),
+                "http://localhost:8080/api/users/activation/"+client.getId(),client.getEmail()));
+
         return mapper.clientToClientDto(client);
     }
 
-    @Override
-    public ManagerDto addManager(ManagerCreateDto managerCreateDto) {
+    public ManagerDto save(ManagerCreateDto managerCreateDto) {
         Role role = roleRepository.findRoleByName("ROLE_MANAGER")
                 .orElseThrow(() -> new NotFoundException("Role with name: ROLE_MANAGER not found."));
         Manager manager = mapper.managerCreateDtoToManager(managerCreateDto);
         manager.setRole(role);
         userRepository.save(manager);
+
+        sendEmail(new MessageDto("account_activation", manager.getFirstName(), manager.getLastName(),
+                "http://localhost:8080/api/users/activation/"+manager.getId(),manager.getEmail()));
+
         return mapper.managerToManagerDto(manager);
     }
 
@@ -140,7 +149,6 @@ public class UserServiceImpl implements UserService {
         claims.put("id", user.getId());
         claims.put("role", user.getRole().getName());
         claims.put("email", user.getEmail());
-        System.out.println(claims.get("email"));
         //Generate token
         return new TokenResponseDto(tokenService.generate(claims));
     }
@@ -182,5 +190,33 @@ public class UserServiceImpl implements UserService {
         return mapper.clientToClientDto(client);
     }
 
+    @Override
+    public void activate(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException(String
+                .format("User with user id: %d not found.", userId)));
+        user.setActivated(true);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void sendEmail(MessageDto messageDto) {
+        jmsTemplate.convertAndSend("send_mail_queue", messageHelper.createTextMessage(messageDto));
+    }
+
+    @Override
+    public ClientDto incrementNumOfReservation(Long clientId) {
+        Client client = (Client) userRepository.findById(clientId).orElseThrow(() -> new NotFoundException(String.format("Client with clientId %d not found", clientId)));
+        client.setNumOfReservation(client.getNumOfReservation() + 1);
+        userRepository.save(client);
+        return mapper.clientToClientDto(client);
+    }
+
+    @Override
+    public ClientDto decrementNumOfReservation(Long clientId) {
+        Client client = (Client) userRepository.findById(clientId).orElseThrow(() -> new NotFoundException(String.format("Client with clientId %d not found", clientId)));
+        client.setNumOfReservation(client.getNumOfReservation() - 1);
+        userRepository.save(client);
+        return mapper.clientToClientDto(client);
+    }
 
 }

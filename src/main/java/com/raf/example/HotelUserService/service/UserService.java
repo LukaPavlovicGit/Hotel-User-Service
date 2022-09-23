@@ -3,6 +3,7 @@ package com.raf.example.HotelUserService.service;
 import com.raf.example.HotelUserService.dto.ClientIdDto;
 import com.raf.example.HotelUserService.dto.DiscountDto;
 import com.raf.example.HotelUserService.dto.IncrementReservationDto;
+import com.raf.example.HotelUserService.dto.MessageDto;
 import com.raf.example.HotelUserService.dto.token.TokenRequestDto;
 import com.raf.example.HotelUserService.dto.token.TokenResponseDto;
 import com.raf.example.HotelUserService.dto.user.*;
@@ -19,9 +20,9 @@ public interface UserService {
 
     Page<ManagerDto> findAllManagers(Pageable pageable);
 
-    ClientDto addClient(ClientCreateDto clientCreateDto);
+    ClientDto save(ClientCreateDto clientCreateDto);
 
-    ManagerDto addManager(ManagerCreateDto managerCreateDto);
+    ManagerDto save(ManagerCreateDto managerCreateDto);
 
     TokenResponseDto login(TokenRequestDto tokenRequestDto);
 
@@ -29,6 +30,12 @@ public interface UserService {
 
     ClientDto incrementNumberOfReservation(IncrementReservationDto incrementReservationDto);
 
+    void activate(Long id);
+
+    void sendEmail(MessageDto messageDto);
+
+    ClientDto incrementNumOfReservation(Long clientId);
+    ClientDto decrementNumOfReservation(Long clientId);
 
 
 }

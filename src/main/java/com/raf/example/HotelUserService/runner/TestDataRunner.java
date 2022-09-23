@@ -57,6 +57,7 @@ public class TestDataRunner implements CommandLineRunner {
         admin.setPhoneNumber("0641234567");
         admin.setBirthdate(new Date());
         admin.setRole(roleAdmin);
+        admin.setActivated(true);
 
         Client c1 = new Client();
         c1.setEmail("c1@gmail.com");
@@ -68,6 +69,7 @@ public class TestDataRunner implements CommandLineRunner {
         c1.setBirthdate(new Date());
         c1.setRole(roleClient);
         c1.setNumOfPassport("123553431");
+        c1.setActivated(true);
 
         Client c2 = new Client();
         c2.setEmail("c2@gmail.com");
@@ -79,6 +81,7 @@ public class TestDataRunner implements CommandLineRunner {
         c2.setBirthdate(new Date());
         c2.setRole(roleClient);
         c2.setNumOfPassport("33255123");
+        c2.setActivated(true);
 
         Manager m1 = new Manager();
         m1.setEmail("m1@gmail.com");
@@ -90,7 +93,8 @@ public class TestDataRunner implements CommandLineRunner {
         m1.setBirthdate(new Date());
         m1.setRole(roleManager);
         m1.setHireDate(new Date());
-        m1.setHotelName("hotel2");
+        m1.setHotelName("hotel1");
+        m1.setActivated(true);
 
         Manager m2 = new Manager();
         m2.setEmail("m2@gmail.com");
@@ -102,13 +106,86 @@ public class TestDataRunner implements CommandLineRunner {
         m2.setBirthdate(new Date());
         m2.setRole(roleManager);
         m2.setHireDate(new Date());
-        m2.setHotelName("hotel1");
+        m2.setHotelName("hotel2");
+        m2.setActivated(true);
+
+        Manager m3 = new Manager();
+        m3.setEmail("m3@gmail.com");
+        m3.setUsername("m3");
+        m3.setPassword("m3");
+        m3.setFirstName("bbbbbb");
+        m3.setLastName("222222222");
+        m3.setPhoneNumber("0641234567");
+        m3.setBirthdate(new Date());
+        m3.setRole(roleManager);
+        m3.setHireDate(new Date());
+        m3.setHotelName("hotel3");
+        m3.setActivated(true);
+
+        Manager m4 = new Manager();
+        m4.setEmail("m4@gmail.com");
+        m4.setUsername("m4");
+        m4.setPassword("m4");
+        m4.setFirstName("bbbbbb");
+        m4.setLastName("222222222");
+        m4.setPhoneNumber("0641234567");
+        m4.setBirthdate(new Date());
+        m4.setRole(roleManager);
+        m4.setHireDate(new Date());
+        m4.setHotelName("hotel4");
+        m4.setActivated(true);
+
+        Manager m5 = new Manager();
+        m5.setEmail("m5@gmail.com");
+        m5.setUsername("m5");
+        m5.setPassword("m5");
+        m5.setFirstName("bbbbbb");
+        m5.setLastName("222222222");
+        m5.setPhoneNumber("0641234567");
+        m5.setBirthdate(new Date());
+        m5.setRole(roleManager);
+        m5.setHireDate(new Date());
+        m5.setHotelName("hotel5");
+        m5.setActivated(true);
+
+        Manager m6= new Manager();
+        m6.setEmail("m6@gmail.com");
+        m6.setUsername("m6");
+        m6.setPassword("m6");
+        m6.setFirstName("bbbbbb");
+        m6.setLastName("222222222");
+        m6.setPhoneNumber("0641234567");
+        m6.setBirthdate(new Date());
+        m6.setRole(roleManager);
+        m6.setHireDate(new Date());
+        m6.setHotelName("hotel6");
+        m6.setActivated(true);
+
+        Manager m7 = new Manager();
+        m7.setEmail("m7@gmail.com");
+        m7.setUsername("m7");
+        m7.setPassword("m7");
+        m7.setFirstName("bbbbbb");
+        m7.setLastName("222222222");
+        m7.setPhoneNumber("0641234567");
+        m7.setBirthdate(new Date());
+        m7.setRole(roleManager);
+        m7.setHireDate(new Date());
+        m7.setHotelName("hotel7");
+        m7.setActivated(true);
 
         userRepository.save(admin);
         userRepository.save(c1);
         userRepository.save(c2);
         userRepository.save(m1);
         userRepository.save(m2);
+        userRepository.save(m3);
+        userRepository.save(m4);
+        userRepository.save(m5);
+        userRepository.save(m6);
+        userRepository.save(m7);
+
+
 
         ClientStatus k1Status = new ClientStatus(c1.getId(), bronze);
         ClientStatus k2Status = new ClientStatus(c2.getId(), bronze);

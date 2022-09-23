@@ -31,6 +31,8 @@ public class User {
     @ManyToOne(optional = false)
     @NotNull
     private Role role;
+    @NotNull
+    private Boolean activated;
 
     public User(){}
 
@@ -104,6 +106,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Boolean getActivated() {
+        return activated;
+    }
+
+    public void setActivated(Boolean activated) {
+        this.activated = activated;
     }
 
     @Override
