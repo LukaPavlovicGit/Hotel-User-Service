@@ -24,23 +24,15 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    /*    @ApiImplicitParams({
-                @ApiImplicitParam(name = "page", value = "What page number you want", dataType = "string", paramType = "query"),
-                @ApiImplicitParam(name = "size", value = "Number of items to return", dataType = "string", paramType = "query"),
-                @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query",
-                        value = "Sorting criteria in the format: property(,asc|desc). " +
-                                "Default sort order is ascending. " +
-                                "Multiple sort criteria are supported.")})*/
+
     @GetMapping
     @ApiOperation(value = "get all users")
-    @CheckSecurity(roles = {"ROLE_MANAGER", "ROLE_ADMIN"})
     public ResponseEntity<Page<UserDto>> getAllUsers(@RequestHeader("authorization") String authorization,
                                                          Pageable pageable) {
         return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
     }
     @GetMapping("/{id}")
     @ApiOperation(value = "get user by id")
-    @CheckSecurity(roles = {"ROLE_MANAGER", "ROLE_ADMIN"})
     public ResponseEntity<UserDto> getUserById(@RequestHeader("authorization") String authorization,
                                                         @PathVariable("id") Long id){
         return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
@@ -48,7 +40,6 @@ public class UserController {
 
     @GetMapping("/clients")
     @ApiOperation(value = "get all clients")
-    @CheckSecurity(roles = {"ROLE_MANAGER", "ROLE_ADMIN"})
     public ResponseEntity<Page<ClientDto>> getClients(@RequestHeader("authorization") String authorization,
                                                         Pageable pageable){
         return new ResponseEntity<>(userService.findAllClients(pageable), HttpStatus.OK);
@@ -56,7 +47,6 @@ public class UserController {
 
     @GetMapping("/managers")
     @ApiOperation(value = "get all managers")
-    @CheckSecurity(roles = {"ROLE_MANAGER", "ROLE_ADMIN"})
     public ResponseEntity<Page<ManagerDto>> getManagers(@RequestHeader("authorization") String authorization,
                                                       Pageable pageable){
         return new ResponseEntity<>(userService.findAllManagers(pageable), HttpStatus.OK);

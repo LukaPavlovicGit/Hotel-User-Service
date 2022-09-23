@@ -79,27 +79,24 @@ public class SecurityAspect {
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
-    public Long getUserId(String authorization){
-        String token = authorization.split(" ")[1];
-        String payload = token.split("\\.")[1];
-        String decodedJSON = new String(decoder.decode(payload));
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        PayloadWrapper payloadWrapper = gson.fromJson(decodedJSON, PayloadWrapper.class);
-        return payloadWrapper.getId();
-    }
-
-    /*
-    // zasto ne je claims null ?
     public Long getUserId(String authorization) {
         String token = authorization.split(" ")[1];
+        token = token.substring(1, token.length()-1);
         Claims claims = tokenService.parseToken(token);
         return claims.get("id", Integer.class).longValue();
     }
 
     public String getUserEmail(String authorization) {
         String token = authorization.split(" ")[1];
+        token = token.substring(1, token.length()-1);
         Claims claims = tokenService.parseToken(token);
         return claims.get("email", String.class);
     }
-    */
+
+    public String getUserRole(String authorization) {
+        String token = authorization.split(" ")[1];
+        token = token.substring(1, token.length()-1);
+        Claims claims = tokenService.parseToken(token);
+        return claims.get("role", String.class);
+    }
 }
