@@ -31,7 +31,6 @@ public class ManagerCreateDto{
     @NotBlank
     private Date birthdate;
 
-    @NotBlank
     private String hotelName;
 
     private Date hireDate;

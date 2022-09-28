@@ -4,7 +4,6 @@ import com.raf.example.HotelUserService.dto.DiscountDto;
 import com.raf.example.HotelUserService.dto.token.TokenRequestDto;
 import com.raf.example.HotelUserService.dto.token.TokenResponseDto;
 import com.raf.example.HotelUserService.dto.user.*;
-import com.raf.example.HotelUserService.secutiry.CheckSecurity;
 import com.raf.example.HotelUserService.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
@@ -53,18 +52,14 @@ public class UserController {
     }
 
     @PostMapping("/registration/client")
-    @CheckSecurity(roles = {"ROLE_MANAGER", "ROLE_ADMIN"})
     @ApiOperation(value = "client registration")
-    public ResponseEntity<ClientDto> registerClient(@RequestHeader("authorization") String authorization,
-                                                        @RequestBody @Valid ClientCreateDto clientCreateDto) {
+    public ResponseEntity<ClientDto> registerClient(@RequestBody @Valid ClientCreateDto clientCreateDto) {
         return new ResponseEntity<>(userService.save(clientCreateDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/registration/manager")
-    @CheckSecurity(roles = {"ROLE_MANAGER", "ROLE_ADMIN"})
     @ApiOperation(value = "manager registration")
-    public ResponseEntity<ManagerDto> registerManager(@RequestHeader("authorization") String authorization,
-                                                        @RequestBody @Valid ManagerCreateDto managerCreateDto) {
+    public ResponseEntity<ManagerDto> registerManager(@RequestBody @Valid ManagerCreateDto managerCreateDto) {
         return new ResponseEntity<>(userService.save(managerCreateDto), HttpStatus.CREATED);
     }
 
