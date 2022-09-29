@@ -93,7 +93,6 @@ public class TestDataRunner implements CommandLineRunner {
         m1.setBirthdate(new Date());
         m1.setRole(roleManager);
         m1.setHireDate(new Date());
-        m1.setHotelName("hotel1");
         m1.setActivated(true);
 
         Manager m2 = new Manager();
@@ -106,7 +105,6 @@ public class TestDataRunner implements CommandLineRunner {
         m2.setBirthdate(new Date());
         m2.setRole(roleManager);
         m2.setHireDate(new Date());
-        m2.setHotelName("hotel2");
         m2.setActivated(true);
 
         Manager m3 = new Manager();
@@ -119,7 +117,6 @@ public class TestDataRunner implements CommandLineRunner {
         m3.setBirthdate(new Date());
         m3.setRole(roleManager);
         m3.setHireDate(new Date());
-        m3.setHotelName("hotel3");
         m3.setActivated(true);
 
         Manager m4 = new Manager();
@@ -132,7 +129,6 @@ public class TestDataRunner implements CommandLineRunner {
         m4.setBirthdate(new Date());
         m4.setRole(roleManager);
         m4.setHireDate(new Date());
-        m4.setHotelName("hotel4");
         m4.setActivated(true);
 
         Manager m5 = new Manager();
@@ -145,7 +141,6 @@ public class TestDataRunner implements CommandLineRunner {
         m5.setBirthdate(new Date());
         m5.setRole(roleManager);
         m5.setHireDate(new Date());
-        m5.setHotelName("hotel5");
         m5.setActivated(true);
 
         Manager m6= new Manager();
@@ -158,7 +153,6 @@ public class TestDataRunner implements CommandLineRunner {
         m6.setBirthdate(new Date());
         m6.setRole(roleManager);
         m6.setHireDate(new Date());
-        m6.setHotelName("hotel6");
         m6.setActivated(true);
 
         Manager m7 = new Manager();
@@ -171,7 +165,6 @@ public class TestDataRunner implements CommandLineRunner {
         m7.setBirthdate(new Date());
         m7.setRole(roleManager);
         m7.setHireDate(new Date());
-        m7.setHotelName("hotel7");
         m7.setActivated(true);
 
         userRepository.save(admin);
