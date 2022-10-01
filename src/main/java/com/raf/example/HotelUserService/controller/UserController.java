@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -26,9 +27,8 @@ public class UserController {
 
     @GetMapping
     @ApiOperation(value = "get all users")
-    public ResponseEntity<Page<UserDto>> getAllUsers(@RequestHeader("authorization") String authorization,
-                                                         Pageable pageable) {
-        return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
+    public ResponseEntity<List<UserDto>> getAllUsers(@RequestHeader("authorization") String authorization) {
+        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
     @GetMapping("/{id}")
     @ApiOperation(value = "get user by id")
@@ -39,14 +39,14 @@ public class UserController {
 
     @GetMapping("/clients")
     @ApiOperation(value = "get all clients")
-    public ResponseEntity<Page<ClientDto>> getClients(@RequestHeader("authorization") String authorization,
-                                                        Pageable pageable){
+    public ResponseEntity<List<ClientDto>> getClients(@RequestHeader("authorization") String authorization,
+                                                      Pageable pageable){
         return new ResponseEntity<>(userService.findAllClients(pageable), HttpStatus.OK);
     }
 
     @GetMapping("/managers")
     @ApiOperation(value = "get all managers")
-    public ResponseEntity<Page<ManagerDto>> getManagers(@RequestHeader("authorization") String authorization,
+    public ResponseEntity<List<ManagerDto>> getManagers(@RequestHeader("authorization") String authorization,
                                                       Pageable pageable){
         return new ResponseEntity<>(userService.findAllManagers(pageable), HttpStatus.OK);
     }

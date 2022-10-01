@@ -25,7 +25,7 @@ public class UserProfileConfigurationController {
     @ApiOperation(value = "client update")
     @CheckSecurity(roles = {"ROLE_CLIENT"})
     public ResponseEntity<ClientDto> updateClient(@RequestHeader("authorization") String authorization,
-                                                     @RequestBody ClientDto clientDto){
+                                                  @RequestBody ClientDto clientDto){
         Long clientId = securityAspect.getUserId(authorization);
         return new ResponseEntity<>(profileConfigurationService.updateClient(clientId, clientDto), HttpStatus.OK);
     }
@@ -34,7 +34,7 @@ public class UserProfileConfigurationController {
     @ApiOperation(value = "manager update")
     @CheckSecurity(roles = {"ROLE_MANAGER"})
     public ResponseEntity<ManagerDto> updateManager(@RequestHeader("authorization") String authorization,
-                                                        @RequestBody ManagerDto managerDto){
+                                                    @RequestBody ManagerDto managerDto){
         Long managerId = securityAspect.getUserId(authorization);
         return new ResponseEntity<>(profileConfigurationService.updateManager(managerId, managerDto), HttpStatus.OK);
     }
@@ -43,7 +43,7 @@ public class UserProfileConfigurationController {
     @ApiOperation(value = "admin update")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
     public ResponseEntity<UserDto> adminUpdate(@RequestHeader("authorization") String authorization,
-                                                    @RequestBody UserDto userDto){
+                                               @RequestBody UserDto userDto){
         Long userId = securityAspect.getUserId(authorization);
         return new ResponseEntity<>(profileConfigurationService.updateAdmin(userId, userDto), HttpStatus.OK);
     }

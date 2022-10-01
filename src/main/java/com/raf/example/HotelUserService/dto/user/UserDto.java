@@ -5,15 +5,10 @@ import java.util.Date;
 public class UserDto {
 
     private String username;
-
     private String firstName;
-
     private String lastName;
-
     private String email;
-
     private String phoneNumber;
-
     private Date birthdate;
     private String roleName;
     private boolean activated;

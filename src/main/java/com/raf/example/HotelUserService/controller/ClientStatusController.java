@@ -20,23 +20,23 @@ public class ClientStatusController {
 
     @GetMapping("/discount/{clientId}")
     public ResponseEntity<DiscountDto> getDiscount(@RequestHeader("authorization") String authorization,
-                                                        @PathVariable("clientId") Long clientId) {
+                                                   @PathVariable("clientId") Long clientId) {
         return new ResponseEntity<>(clientStatusService.findDiscount(clientId), HttpStatus.OK);
     }
 
-    @PutMapping("/forbidAccess/{clientId}")
+    @PutMapping("/block")
     @ApiOperation(value = "forbid access")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
     public ResponseEntity<ClientStatusDto> forbidAccess(@RequestHeader("authorization") String authorization,
-                                                            @PathVariable("clientId") Long clientId){
+                                                        @RequestBody Long clientId){
         return new ResponseEntity<>(clientStatusService.forbidAccess(clientId), HttpStatus.OK);
     }
 
-    @PutMapping("/allowAccess/{clientId}")
+    @PutMapping("/unblock")
     @ApiOperation(value = "allow access")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
     public ResponseEntity<ClientStatusDto> allowAccess(@RequestHeader("authorization") String authorization,
-                                                            @PathVariable("clientId") Long clientId){
+                                                       @RequestBody Long clientId){
         return new ResponseEntity<>(clientStatusService.allowAccess(clientId), HttpStatus.OK);
     }
 }

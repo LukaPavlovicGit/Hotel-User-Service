@@ -20,11 +20,11 @@ public class RankController {
         this.rankService = rankService;
     }
 
-    @PutMapping("/rankConfiguration/")
+    @PutMapping
     @ApiOperation(value = "rank configuration")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
     public ResponseEntity<RankDto> rankConfiguration(@RequestHeader("authorization") String authorization,
-                                                        @RequestBody @Valid RankDto rankDto){
+                                                     @RequestBody @Valid RankDto rankDto){
         return new ResponseEntity<>(rankService.rankConfiguration(rankDto), HttpStatus.OK);
     }
 }

@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -54,9 +55,8 @@ public class UserService {
         this.messageHelper = messageHelper;
     }
 
-    public Page<UserDto> findAll(Pageable pageable) {
-        return userRepository.findAll(pageable)
-                .map(mapper::userToUserDto);
+    public List<UserDto> findAll() {
+        return userRepository.findAll().stream().map(mapper::userToUserDto).collect(Collectors.toList());
     }
 
     public UserDto findUserById(Long id) {
@@ -65,7 +65,7 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException(String.format("User with id: %d does not exists.", id)));
     }
 
-    public Page<ClientDto> findAllClients(Pageable pageable) {
+    public List<ClientDto> findAllClients(Pageable pageable) {
         List<ClientDto> clients = new ArrayList<>();
         userRepository.findAll(pageable)
                 .forEach( user -> {
@@ -73,11 +73,10 @@ public class UserService {
                             clients.add(mapper.clientToClientDto((Client) user));
                     }
                 );
-        Page<ClientDto> page = new PageImpl<>(clients);
-        return page;
+        return clients;
     }
 
-    public Page<ManagerDto> findAllManagers(Pageable pageable) {
+    public List<ManagerDto> findAllManagers(Pageable pageable) {
         List<ManagerDto> managers = new ArrayList<>();
         userRepository.findAll(pageable)
                 .forEach( user -> {
@@ -85,8 +84,7 @@ public class UserService {
                                 managers.add(mapper.managerToManagerDto((Manager) user));
                         }
                 );
-        Page<ManagerDto> page = new PageImpl<>(managers);
-        return page;
+        return managers;
     }
 
     public ClientDto save(ClientCreateDto clientCreateDto) {
