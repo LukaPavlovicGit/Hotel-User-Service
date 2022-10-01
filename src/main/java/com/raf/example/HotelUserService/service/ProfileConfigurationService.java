@@ -43,6 +43,7 @@ public class ProfileConfigurationService {
         Manager update = mapper.managerDtoToManager(managerDto);
         update.setId(managerId);
         update.setRole(user.getRole());
+        update.setHotelName(((Manager)user).getHotelName());
         update.setActivated(user.getActivated());
         userRepository.save(update);
         return managerDto;

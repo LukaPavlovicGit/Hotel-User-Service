@@ -8,6 +8,8 @@ import com.raf.example.HotelUserService.repository.RankRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class RankService {
@@ -16,6 +18,15 @@ public class RankService {
 
     public RankService(RankRepository rankRepository){
         this.rankRepository = rankRepository;
+    }
+
+    public RankDto save(RankDto rankDto){
+
+        return rankDto;
+    }
+    public List<RankDto> saveAll(List<RankDto> ranksDto){
+
+        return ranksDto;
     }
 
     public RankDto rankConfiguration(RankDto rankDto) {
