@@ -32,6 +32,17 @@ public class ClientCreateDto {
 
     public ClientCreateDto(){}
 
+    public ClientCreateDto(String username, String password, String fistName, String lastName, String email, String phoneNumber, Date birthdate, String numOfPassport) {
+        this.username = username;
+        this.password = password;
+        this.fistName = fistName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.birthdate = birthdate;
+        this.numOfPassport = numOfPassport;
+    }
+
     public String getUsername() {
         return username;
     }

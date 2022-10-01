@@ -36,6 +36,29 @@ public class User {
 
     public User(){}
 
+    public User(String username, String firstName, String lastName, String email, String phoneNumber, Date birthdate, Role role, Boolean activated) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.birthdate = birthdate;
+        this.role = role;
+        this.activated = activated;
+    }
+
+    public User(String username, String password, String firstName, String lastName, String email, String phoneNumber, Date birthdate, Role role, Boolean activated) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.birthdate = birthdate;
+        this.role = role;
+        this.activated = activated;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

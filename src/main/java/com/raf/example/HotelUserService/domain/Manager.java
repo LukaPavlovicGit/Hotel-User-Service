@@ -13,6 +13,12 @@ public class Manager extends User{
 
     public Manager(){ }
 
+    public Manager(String username, String firstName, String lastName, String email, String phoneNumber, Date birthdate, Role role, Boolean activated, String hotelName, Date hireDate) {
+        super(username, firstName, lastName, email, phoneNumber, birthdate, role, activated);
+        this.hotelName = hotelName;
+        this.hireDate = hireDate;
+    }
+
     public Manager(String hotelName, Date hireDate) {
         this.hotelName = hotelName;
         this.hireDate = hireDate;

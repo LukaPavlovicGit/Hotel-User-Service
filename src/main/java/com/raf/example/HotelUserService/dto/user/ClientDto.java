@@ -5,28 +5,27 @@ import java.util.Date;
 
 public class ClientDto {
 
-    private Long id;
     private String username;
-    private String password;
     private String firstName;
     private String lastName;
     private String email;
     private String phoneNumber;
     private Date birthdate;
-
     private String numOfPassport;
     private Integer numOfReservation;
 
     public ClientDto(){}
 
-    public Long getId() {
-        return id;
+    public ClientDto(String username, String firstName, String lastName, String email, String phoneNumber, Date birthdate, String numOfPassport, Integer numOfReservation) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.birthdate = birthdate;
+        this.numOfPassport = numOfPassport;
+        this.numOfReservation = numOfReservation;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 
     public String getUsername() {
         return username;
@@ -34,14 +33,6 @@ public class ClientDto {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFirstName() {

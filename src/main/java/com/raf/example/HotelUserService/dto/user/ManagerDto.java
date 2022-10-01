@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class ManagerDto {
 
-    private Long id;
+    private String username;
     private String fistName;
     private String lastName;
     private String email;
@@ -14,13 +14,26 @@ public class ManagerDto {
     private String hotelName;
     private Date hireDate;
 
-
-    public Long getId() {
-        return id;
+    public ManagerDto() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public ManagerDto(String username, String fistName, String lastName, String email, String phoneNumber, Date birthdate, String hotelName, Date hireDate) {
+        this.username = username;
+        this.fistName = fistName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.birthdate = birthdate;
+        this.hotelName = hotelName;
+        this.hireDate = hireDate;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFistName() {

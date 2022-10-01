@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class UserDto {
 
-    private Long id;
     private String username;
 
     private String firstName;
@@ -16,14 +15,21 @@ public class UserDto {
     private String phoneNumber;
 
     private Date birthdate;
+    private String roleName;
+    private boolean activated;
 
-
-    public Long getId() {
-        return id;
+    public UserDto() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public UserDto(String username, String firstName, String lastName, String email, String phoneNumber, Date birthdate, String roleName, boolean activated) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.birthdate = birthdate;
+        this.roleName = roleName;
+        this.activated = activated;
     }
 
     public String getUsername() {
@@ -72,6 +78,22 @@ public class UserDto {
 
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 
     @Override

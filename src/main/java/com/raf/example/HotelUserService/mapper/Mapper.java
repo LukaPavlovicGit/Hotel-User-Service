@@ -1,75 +1,49 @@
 package com.raf.example.HotelUserService.mapper;
 
-import com.raf.example.HotelUserService.domain.Client;
-import com.raf.example.HotelUserService.domain.ClientStatus;
-import com.raf.example.HotelUserService.domain.Manager;
-import com.raf.example.HotelUserService.domain.User;
+import com.raf.example.HotelUserService.domain.*;
 import com.raf.example.HotelUserService.dto.ClientStatusDto;
 import com.raf.example.HotelUserService.dto.user.*;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 
 @Component
 public class Mapper {
-    private ModelMapper modelMapper;
-
-    public Mapper(ModelMapper modelMapper){
-        this.modelMapper = modelMapper;
-    }
 
     public UserDto userToUserDto(User user){
-        UserDto userDto = new UserDto();
-        userDto = modelMapper.map(user, UserDto.class);
-        return userDto;
+        return new UserDto(user.getUsername(),user.getFirstName(),user.getLastName(),user.getEmail(),
+                            user.getPhoneNumber(),user.getBirthdate(),user.getRole().getName(), user.getActivated());
     }
 
     public User userDtoToUser(UserDto userDto){
-        User user = new User();
-        user = modelMapper.map(userDto, User.class);
-        return user;
+        return new User(userDto.getUsername(), userDto.getFirstName(), userDto.getLastName(), userDto.getEmail(),
+                userDto.getPhoneNumber(), userDto.getPhoneNumber(), userDto.getBirthdate(), null, userDto.isActivated());
     }
-
     public Client clientCreateDtoToClient(ClientCreateDto clientCreateDto){
-        Client client = new Client();
-        client = modelMapper.map(clientCreateDto, Client.class);
-        return client;
+        return new Client(clientCreateDto.getUsername(),clientCreateDto.getFistName(),clientCreateDto.getLastName(),clientCreateDto.getEmail(),clientCreateDto.getPhoneNumber(),
+                clientCreateDto.getBirthdate(), null, false, clientCreateDto.getNumOfPassport(), 0);
     }
-
     public Client clientDtoToClient(ClientDto clientDto){
-        Client client = new Client();
-        client = modelMapper.map(clientDto, Client.class);
-        return client;
+        return new Client(clientDto.getUsername(),clientDto.getFirstName(),clientDto.getLastName(),clientDto.getEmail(),clientDto.getPhoneNumber(),clientDto.getBirthdate(),
+                null, null, clientDto.getNumOfPassport(), clientDto.getNumOfReservation());
     }
-
     public ClientDto clientToClientDto(Client client){
-        ClientDto clientDto = new ClientDto();
-        clientDto = modelMapper.map(client, ClientDto.class);
-        return clientDto;
+       return new ClientDto(client.getUsername(),client.getFirstName(),client.getLastName(),client.getEmail(),client.getPhoneNumber(),
+                            client.getBirthdate(),client.getNumOfPassport(), client.getNumOfReservation());
     }
-
     public Manager managerCreateDtoToManager(ManagerCreateDto managerCreateDto){
-        Manager manager = new Manager();
-        manager = modelMapper.map(managerCreateDto, Manager.class);
-        return manager;
+        return new Manager(managerCreateDto.getUsername(),managerCreateDto.getFistName(),managerCreateDto.getLastName(),managerCreateDto.getEmail(),managerCreateDto.getPhoneNumber(),
+                managerCreateDto.getBirthdate(), null, false, null, managerCreateDto.getHireDate());
     }
-
-    public Manager managerDtoToClient(ManagerDto managerDto){
-        Manager manager = new Manager();
-        manager = modelMapper.map(managerDto, Manager.class);
-        return manager;
+    public Manager managerDtoToManager(ManagerDto managerDto){
+        return new Manager(managerDto.getUsername(),managerDto.getFistName(), managerDto.getLastName(), managerDto.getEmail(), managerDto.getPhoneNumber(), managerDto.getBirthdate(),
+                            null, null, managerDto.getHotelName(), managerDto.getHireDate());
     }
-
     public ManagerDto managerToManagerDto(Manager manager){
-        ManagerDto managerDto = new ManagerDto();
-        managerDto = modelMapper.map(manager, ManagerDto.class);
-        return managerDto;
+        return new ManagerDto(manager.getUsername(), manager.getFirstName(), manager.getLastName(), manager.getEmail(), manager.getPhoneNumber(), manager.getBirthdate(),
+                manager.getHotelName(), manager.getHireDate());
     }
-
     public ClientStatusDto clientStatusToClientStatusDto(ClientStatus clientStatus){
-        ClientStatusDto clientStatusDto = new ClientStatusDto();
-        clientStatusDto = modelMapper.map(clientStatus, ClientStatusDto.class);
-        return clientStatusDto;
+        return new ClientStatusDto(clientStatus.getUserId(), clientStatus.getAccessForbidden(),clientStatus.getDiscount(), null);
     }
 
 }

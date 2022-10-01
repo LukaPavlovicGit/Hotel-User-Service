@@ -32,6 +32,7 @@ public class ProfileConfigurationService {
         update.setId(clientId);
         update.setNumOfReservation(((Client)user).getNumOfReservation());
         update.setRole(user.getRole());
+        update.setActivated(user.getActivated());
         userRepository.save(update);
         return clientDto;
     }
@@ -39,9 +40,10 @@ public class ProfileConfigurationService {
     public ManagerDto updateManager(Long managerId, ManagerDto managerDto) {
         User user = userRepository.findById(managerId)
                 .orElseThrow(() -> new NotFoundException(String.format("Manager with id: %d does not exists.", managerId)));
-        Manager update = mapper.managerDtoToClient(managerDto);
+        Manager update = mapper.managerDtoToManager(managerDto);
         update.setId(managerId);
         update.setRole(user.getRole());
+        update.setActivated(user.getActivated());
         userRepository.save(update);
         return managerDto;
     }
@@ -52,6 +54,7 @@ public class ProfileConfigurationService {
         User update = mapper.userDtoToUser(userDto);
         update.setId(userId);
         update.setRole(user.getRole());
+        update.setActivated(user.getActivated());
         userRepository.save(update);
         return userDto;
     }
