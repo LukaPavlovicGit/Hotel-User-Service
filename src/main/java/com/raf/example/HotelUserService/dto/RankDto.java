@@ -3,10 +3,22 @@ package com.raf.example.HotelUserService.dto;
 import javax.validation.constraints.NotBlank;
 
 public class RankDto {
-    @NotBlank
+    private Long id;
     private String name;
-    @NotBlank
     private Integer reach;
+
+    public RankDto() {
+    }
+
+    public RankDto(Long id, String name, Integer reach) {
+        this.id = id;
+        this.name = name;
+        this.reach = reach;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

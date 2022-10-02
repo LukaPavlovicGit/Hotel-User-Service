@@ -28,7 +28,7 @@ public class RankService {
 
         return ranksDto;
     }
-
+    // MORA DA SE IZMENI OBAVEZNO !!!!!!!!!!!!!!!!!!!!!
     public RankDto rankConfiguration(RankDto rankDto) {
         Rank rank = rankRepository
                 .findByName(rankDto.getName())

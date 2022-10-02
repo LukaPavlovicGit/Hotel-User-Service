@@ -4,6 +4,7 @@ import com.raf.example.HotelUserService.dto.DiscountDto;
 import com.raf.example.HotelUserService.dto.token.TokenRequestDto;
 import com.raf.example.HotelUserService.dto.token.TokenResponseDto;
 import com.raf.example.HotelUserService.dto.user.*;
+import com.raf.example.HotelUserService.secutiry.CheckSecurity;
 import com.raf.example.HotelUserService.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
@@ -27,18 +28,21 @@ public class UserController {
 
     @GetMapping
     @ApiOperation(value = "get all users")
+    @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_CLIENT"})
     public ResponseEntity<List<UserDto>> getAllUsers(@RequestHeader("authorization") String authorization) {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
     @GetMapping("/{id}")
     @ApiOperation(value = "get user by id")
+    @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_MANAGER"})
     public ResponseEntity<UserDto> getUserById(@RequestHeader("authorization") String authorization,
-                                                        @PathVariable("id") Long id){
+                                               @PathVariable("id") Long id){
         return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
     }
 
     @GetMapping("/clients")
     @ApiOperation(value = "get all clients")
+    @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_MANAGER"})
     public ResponseEntity<List<ClientDto>> getClients(@RequestHeader("authorization") String authorization,
                                                       Pageable pageable){
         return new ResponseEntity<>(userService.findAllClients(pageable), HttpStatus.OK);
@@ -46,6 +50,7 @@ public class UserController {
 
     @GetMapping("/managers")
     @ApiOperation(value = "get all managers")
+    @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_MANAGER"})
     public ResponseEntity<List<ManagerDto>> getManagers(@RequestHeader("authorization") String authorization,
                                                       Pageable pageable){
         return new ResponseEntity<>(userService.findAllManagers(pageable), HttpStatus.OK);
