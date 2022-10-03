@@ -28,7 +28,7 @@ public class UserController {
 
     @GetMapping
     @ApiOperation(value = "get all users")
-    @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_MANAGER", "ROLE_CLIENT"})
+    @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_MANAGER"})
     public ResponseEntity<List<UserDto>> getAllUsers(@RequestHeader("authorization") String authorization) {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }

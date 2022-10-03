@@ -2,6 +2,7 @@ package com.raf.example.HotelUserService.mapper;
 
 import com.raf.example.HotelUserService.domain.*;
 import com.raf.example.HotelUserService.dto.ClientStatusDto;
+import com.raf.example.HotelUserService.dto.RankDto;
 import com.raf.example.HotelUserService.dto.user.*;
 import org.springframework.stereotype.Component;
 
@@ -43,6 +44,10 @@ public class Mapper {
     }
     public ClientStatusDto clientStatusToClientStatusDto(ClientStatus clientStatus){
         return new ClientStatusDto(clientStatus.getUserId(), clientStatus.getAccessForbidden(),clientStatus.getDiscount(), null);
+    }
+
+    public Rank RankDtoToRank(RankDto rankDto){
+        return new Rank(rankDto.getName(), rankDto.getReach());
     }
 
 }

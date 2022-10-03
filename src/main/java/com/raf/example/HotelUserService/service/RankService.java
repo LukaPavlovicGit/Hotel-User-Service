@@ -4,77 +4,52 @@ import com.raf.example.HotelUserService.domain.Rank;
 import com.raf.example.HotelUserService.dto.RankDto;
 import com.raf.example.HotelUserService.exception.NotFoundException;
 import com.raf.example.HotelUserService.exception.OperationNotAllowed;
+import com.raf.example.HotelUserService.mapper.Mapper;
 import com.raf.example.HotelUserService.repository.RankRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class RankService {
 
     private RankRepository rankRepository;
+    private Mapper mapper;
 
-    public RankService(RankRepository rankRepository){
+    public RankService(RankRepository rankRepository, Mapper mapper) {
         this.rankRepository = rankRepository;
+        this.mapper = mapper;
     }
 
     public RankDto save(RankDto rankDto){
+        Optional<Rank> rank = rankRepository.findByName(rankDto.getName());
+        if(rank.isPresent())
+            throw new OperationNotAllowed(String.format("Rank with a name: %s already exist", rankDto.getName()));
 
+        rankRepository.save(mapper.RankDtoToRank(rankDto));
         return rankDto;
     }
     public List<RankDto> saveAll(List<RankDto> ranksDto){
 
+        for(RankDto r : ranksDto){
+            Optional<Rank> rank = rankRepository.findByName(r.getName());
+            if(rank.isPresent())
+                throw new OperationNotAllowed(String.format("Rank with a name: %s already exist", r.getName()));
+        }
+        for(RankDto r : ranksDto)
+            rankRepository.save(mapper.RankDtoToRank(r));
+
         return ranksDto;
     }
-    // MORA DA SE IZMENI OBAVEZNO !!!!!!!!!!!!!!!!!!!!!
     public RankDto rankConfiguration(RankDto rankDto) {
         Rank rank = rankRepository
                 .findByName(rankDto.getName())
                 .orElseThrow(() -> new NotFoundException(String.format("Rank with a name: %s not found", rankDto.getName())));
-
-        if(rank.getName().equals("BRONZE")){
-            Rank silver = rankRepository
-                    .findByName("SILVER")
-                    .orElseThrow(() -> new NotFoundException("Rank with a name: SILVER not found"));
-
-            if(rankDto.getReach() < silver.getReach()){
-                rank.setReach(rankDto.getReach());
-                rankRepository.save(rank);
-            }
-            else throw new OperationNotAllowed(String.format("Given reach for a BRONZE is %s, but should be smaller than reach of a SILVER which is %s", rankDto.getReach(), silver.getReach()));
-        }
-
-        else if(rank.getName().equals("SILVER")){
-            Rank bronze = rankRepository
-                    .findByName("BRONZE")
-                    .orElseThrow(() -> new NotFoundException("Rank with a name: SILVER not found"));
-            Rank gold = rankRepository
-                    .findByName("GOLD")
-                    .orElseThrow(() -> new NotFoundException("Rank with a name: SILVER not found"));
-
-            if(rankDto.getReach() > bronze.getReach()){
-                 if(rankDto.getReach() < gold.getReach()){
-                    rank.setReach(rankDto.getReach());
-                     rankRepository.save(rank);
-                 }
-                 else throw new OperationNotAllowed(String.format("Given reach for a SILVER is %s, but should be smaller than reach of a GOLD which is %s", rankDto.getReach(), gold.getReach()));
-            }
-            else throw new OperationNotAllowed(String.format("Given reach for a SILVER is %s, but should be bigger than reach of a BRONZE which is %s", rankDto.getReach(), bronze.getReach()));
-        }
-        else if(rank.getName().equals("GOLD")){
-            Rank silver = rankRepository
-                    .findByName("SILVER")
-                    .orElseThrow(() -> new NotFoundException("Rank with a name: SILVER not found"));
-
-            if(rankDto.getReach() > silver.getReach()){
-                silver.setReach(rankDto.getReach());
-                rankRepository.save(rank);
-            }
-            else throw new OperationNotAllowed(String.format("Given reach for a GOLD is %s, but should be bigger than reach of a SILVER which is %s", rankDto.getReach(), silver.getReach()));
-        }
-
+        rank.setReach(rankDto.getReach());
+        rankRepository.save(rank);
         return rankDto;
     }
 }
