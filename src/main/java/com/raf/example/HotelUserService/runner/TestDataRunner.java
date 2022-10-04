@@ -28,7 +28,27 @@ public class TestDataRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        clientStatusRepository.deleteAll();
+
+        //Insert roles
+        Role roleClient = new Role("ROLE_CLIENT");
+        Role roleAdmin = new Role("ROLE_ADMIN");
+        Role roleManager = new Role("ROLE_MANAGER");
+        roleRepository.save(roleClient);
+        roleRepository.save(roleAdmin);
+        roleRepository.save(roleManager);
+        //Insert admin
+        Admin admin = new Admin();
+        admin.setEmail("admin@gmail.com");
+        admin.setUsername("admin");
+        admin.setPassword("admin");
+        admin.setFirstName("Luka");
+        admin.setLastName("Pavlovic");
+        admin.setPhoneNumber("0641234567");
+        admin.setBirthdate(new Date());
+        admin.setRole(roleAdmin);
+        admin.setActivated(true);
+
+        /*clientStatusRepository.deleteAll();
         userRepository.deleteAll();
         roleRepository.deleteAll();
         rankRepository.deleteAll();
@@ -185,7 +205,7 @@ public class TestDataRunner implements CommandLineRunner {
 
         clientStatusRepository.save(k1Status);
         clientStatusRepository.save(k2Status);
-
+*/
 
 
     }
