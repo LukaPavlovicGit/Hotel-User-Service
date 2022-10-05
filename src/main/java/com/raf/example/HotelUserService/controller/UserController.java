@@ -58,19 +58,19 @@ public class UserController {
 
     @PostMapping("/registration/client")
     @ApiOperation(value = "client registration")
-    public ResponseEntity<ClientDto> registerClient(@RequestBody @Valid ClientCreateDto clientCreateDto) {
+    public ResponseEntity<ClientDto> registerClient(@RequestBody ClientCreateDto clientCreateDto) {
         return new ResponseEntity<>(userService.save(clientCreateDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/registration/manager")
     @ApiOperation(value = "manager registration")
-    public ResponseEntity<ManagerDto> registerManager(@RequestBody @Valid ManagerCreateDto managerCreateDto) {
+    public ResponseEntity<ManagerDto> registerManager(@RequestBody ManagerCreateDto managerCreateDto) {
         return new ResponseEntity<>(userService.save(managerCreateDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
     @ApiOperation(value = "login")
-    public ResponseEntity<TokenResponseDto> login(@RequestBody @Valid TokenRequestDto tokenRequestDto) {
+    public ResponseEntity<TokenResponseDto> login(@RequestBody TokenRequestDto tokenRequestDto) {
         return new ResponseEntity<>(userService.login(tokenRequestDto), HttpStatus.OK);
     }
 

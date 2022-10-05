@@ -18,9 +18,11 @@ public class Mapper {
         return new User(userDto.getUsername(), userDto.getFirstName(), userDto.getLastName(), userDto.getEmail(),
                 userDto.getPhoneNumber(), userDto.getPhoneNumber(), userDto.getBirthdate(), null, userDto.isActivated());
     }
+    //String username, String password, String firstName, String lastName, String email,
+    // String phoneNumber, Date birthdate, Role role, Boolean activated, String numOfPassport, Integer numOfReservation
     public Client clientCreateDtoToClient(ClientCreateDto clientCreateDto){
-        return new Client(clientCreateDto.getUsername(),clientCreateDto.getFistName(),clientCreateDto.getLastName(),clientCreateDto.getEmail(),clientCreateDto.getPhoneNumber(),
-                clientCreateDto.getBirthdate(), null, false, clientCreateDto.getNumOfPassport(), 0);
+        return new Client(clientCreateDto.getUsername(),clientCreateDto.getPassword(),clientCreateDto.getFistName(),clientCreateDto.getLastName(),clientCreateDto.getEmail(),
+                clientCreateDto.getPhoneNumber(), clientCreateDto.getBirthdate(),null, false, clientCreateDto.getNumOfPassport(), 0);
     }
     public Client clientDtoToClient(ClientDto clientDto){
         return new Client(clientDto.getUsername(),clientDto.getFirstName(),clientDto.getLastName(),clientDto.getEmail(),clientDto.getPhoneNumber(),clientDto.getBirthdate(),

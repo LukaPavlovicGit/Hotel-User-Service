@@ -12,6 +12,13 @@ public class Client extends User{
     public Client(){
         this.numOfReservation = 0;
     }
+
+    public Client(String username, String password, String firstName, String lastName, String email, String phoneNumber, Date birthdate, Role role, Boolean activated, String numOfPassport, Integer numOfReservation) {
+        super(username, password, firstName, lastName, email, phoneNumber, birthdate, role, activated);
+        this.numOfPassport = numOfPassport;
+        this.numOfReservation = numOfReservation;
+    }
+
     public Client(String username, String firstName, String lastName, String email, String phoneNumber, Date birthdate, Role role, Boolean activated, String numOfPassport, Integer numOfReservation) {
         super(username, firstName, lastName, email, phoneNumber, birthdate, role, activated);
         this.numOfPassport = numOfPassport;

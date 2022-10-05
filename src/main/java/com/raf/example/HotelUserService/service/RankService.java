@@ -33,7 +33,7 @@ public class RankService {
         return rankDto;
     }
     public List<RankDto> saveAll(List<RankDto> ranksDto){
-
+        System.out.println(ranksDto);
         for(RankDto r : ranksDto){
             Optional<Rank> rank = rankRepository.findByName(r.getName());
             if(rank.isPresent())

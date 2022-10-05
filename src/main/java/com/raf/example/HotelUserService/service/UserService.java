@@ -90,14 +90,11 @@ public class UserService {
     public ClientDto save(ClientCreateDto clientCreateDto) {
         Role role = roleRepository.findRoleByName("ROLE_CLIENT")
                 .orElseThrow(() -> new NotFoundException("Role with name: ROLE_CLIENT not found."));
-
         Client client = mapper.clientCreateDtoToClient(clientCreateDto);
         client.setRole(role);
         userRepository.save(client);
-
         Rank rank = rankRepository.findByName("BRONZE").orElseThrow(() -> new NotFoundException(""));
-        ClientStatus clientStatus = new ClientStatus(client.getId(), rank);
-        clientStatusRepository.save(clientStatus);
+        clientStatusRepository.save(new ClientStatus(client.getId(), rank));
 
         sendEmail(new MessageDto("account_activation", client.getFirstName(), client.getLastName(),
                 "http://localhost:8080/api/users/activation/"+client.getId(),client.getEmail()));
@@ -124,7 +121,8 @@ public class UserService {
                 .findUserByUsernameAndPassword(tokenRequestDto.getUsername(), tokenRequestDto.getPassword())
                 .orElseThrow(() -> new NotFoundException(String.format("User with username: %s and password: %s not found.",
                         tokenRequestDto.getUsername(), tokenRequestDto.getPassword())));
-        if(user instanceof  Client){
+
+        if(user instanceof Client){
             Optional<ClientStatus> clientStatusOptional = clientStatusRepository.findClientStatusByUserId(user.getId());
             if(clientStatusOptional.isPresent()){
                 ClientStatus clientStatus = clientStatusOptional.get();

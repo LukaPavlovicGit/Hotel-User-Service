@@ -1,12 +1,7 @@
 package com.raf.example.HotelUserService.secutiry;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.raf.example.HotelUserService.dto.PayloadWrapper;
 import com.raf.example.HotelUserService.secutiry.tokenService.TokenService;
 import io.jsonwebtoken.Claims;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,10 +14,6 @@ import org.springframework.http.ResponseEntity;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Base64;
-
-
-@AllArgsConstructor
-@NoArgsConstructor
 
 @Aspect
 @Configuration
