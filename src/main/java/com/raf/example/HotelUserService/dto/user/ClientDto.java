@@ -1,6 +1,6 @@
 package com.raf.example.HotelUserService.dto.user;
 
-import java.util.Date;
+import java.sql.Date;
 
 
 public class ClientDto {
@@ -89,5 +89,19 @@ public class ClientDto {
 
     public void setNumOfReservation(Integer numOfReservation) {
         this.numOfReservation = numOfReservation;
+    }
+
+    @Override
+    public String toString() {
+        return "ClientDto{" +
+                "username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", birthdate=" + birthdate +
+                ", numOfPassport='" + numOfPassport + '\'' +
+                ", numOfReservation=" + numOfReservation +
+                '}';
     }
 }

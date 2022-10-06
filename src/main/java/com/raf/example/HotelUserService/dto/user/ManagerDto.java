@@ -1,6 +1,6 @@
 package com.raf.example.HotelUserService.dto.user;
 
-import java.util.Date;
+import java.sql.Date;
 
 
 public class ManagerDto {

@@ -16,10 +16,8 @@ public class Mapper {
     }
     public User userDtoToUser(UserDto userDto){
         return new User(userDto.getUsername(), userDto.getFirstName(), userDto.getLastName(), userDto.getEmail(),
-                userDto.getPhoneNumber(), userDto.getPhoneNumber(), userDto.getBirthdate(), null, userDto.isActivated());
+                userDto.getPhoneNumber(), userDto.getBirthdate(), null, false);
     }
-    //String username, String password, String firstName, String lastName, String email,
-    // String phoneNumber, Date birthdate, Role role, Boolean activated, String numOfPassport, Integer numOfReservation
     public Client clientCreateDtoToClient(ClientCreateDto clientCreateDto){
         return new Client(clientCreateDto.getUsername(),clientCreateDto.getPassword(),clientCreateDto.getFistName(),clientCreateDto.getLastName(),clientCreateDto.getEmail(),
                 clientCreateDto.getPhoneNumber(), clientCreateDto.getBirthdate(),null, false, clientCreateDto.getNumOfPassport(), 0);
@@ -33,8 +31,8 @@ public class Mapper {
                             client.getBirthdate(),client.getNumOfPassport(), client.getNumOfReservation());
     }
     public Manager managerCreateDtoToManager(ManagerCreateDto managerCreateDto){
-        return new Manager(managerCreateDto.getUsername(),managerCreateDto.getFistName(),managerCreateDto.getLastName(),managerCreateDto.getEmail(),managerCreateDto.getPhoneNumber(),
-                managerCreateDto.getBirthdate(), null, false, null, managerCreateDto.getHireDate());
+        return new Manager(managerCreateDto.getUsername(),managerCreateDto.getPassword(),managerCreateDto.getFistName(),managerCreateDto.getLastName(),managerCreateDto.getEmail(),
+                managerCreateDto.getPhoneNumber(), managerCreateDto.getBirthdate(), null, false, null,managerCreateDto.getHireDate());
     }
     public Manager managerDtoToManager(ManagerDto managerDto){
         return new Manager(managerDto.getUsername(),managerDto.getFistName(), managerDto.getLastName(), managerDto.getEmail(), managerDto.getPhoneNumber(), managerDto.getBirthdate(),

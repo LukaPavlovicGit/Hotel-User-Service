@@ -28,14 +28,14 @@ public class RankController {
     @CheckSecurity(roles = {"ROLE_ADMIN"})
     public ResponseEntity<RankDto> addRank(@RequestHeader("authorization") String authorization,
                                            @RequestBody RankDto rankDto){
-        return new ResponseEntity<>(rankService.save(rankDto), HttpStatus.CREATED); // nije implementirano
+        return new ResponseEntity<>(rankService.save(rankDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/all")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
     public ResponseEntity<List<RankDto>> addAllRanks(@RequestHeader("authorization") String authorization,
                                                      @RequestBody List<RankDto> roomTypesDto){
-        return new ResponseEntity<>(rankService.saveAll(roomTypesDto), HttpStatus.CREATED); // nije implementirano
+        return new ResponseEntity<>(rankService.saveAll(roomTypesDto), HttpStatus.CREATED);
     }
 
     @PutMapping

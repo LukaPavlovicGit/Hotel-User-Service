@@ -3,7 +3,7 @@ package com.raf.example.HotelUserService.dto.user;
 import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
+import java.sql.Date;
 
 public class ClientCreateDto {
     @NotBlank

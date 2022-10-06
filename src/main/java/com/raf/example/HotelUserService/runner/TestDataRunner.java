@@ -8,7 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Profile({"default"})
 @Component
@@ -43,14 +43,14 @@ public class TestDataRunner implements CommandLineRunner {
         roleRepository.save(roleManager);
 
         //Insert admin
-        Admin admin = new Admin();
+        User admin = new User();
         admin.setEmail("admin@gmail.com");
         admin.setUsername("admin");
         admin.setPassword("admin");
         admin.setFirstName("Luka");
         admin.setLastName("Pavlovic");
         admin.setPhoneNumber("0641234567");
-        admin.setBirthdate(new Date());
+        admin.setBirthdate(Date.valueOf("1990-10-10"));
         admin.setRole(roleAdmin);
         admin.setActivated(true);
 

@@ -1,5 +1,6 @@
 package com.raf.example.HotelUserService.service;
 
+import com.raf.example.HotelUserService.domain.Admin;
 import com.raf.example.HotelUserService.domain.Client;
 import com.raf.example.HotelUserService.domain.Manager;
 import com.raf.example.HotelUserService.domain.User;
@@ -30,6 +31,7 @@ public class ProfileConfigurationService {
                 .orElseThrow(() -> new NotFoundException(String.format("Client with id: %d does not exists.", clientId)));
         Client update = mapper.clientDtoToClient(clientDto);
         update.setId(clientId);
+        update.setPassword(user.getPassword());
         update.setNumOfReservation(((Client)user).getNumOfReservation());
         update.setRole(user.getRole());
         update.setActivated(user.getActivated());
@@ -42,6 +44,7 @@ public class ProfileConfigurationService {
                 .orElseThrow(() -> new NotFoundException(String.format("Manager with id: %d does not exists.", managerId)));
         Manager update = mapper.managerDtoToManager(managerDto);
         update.setId(managerId);
+        update.setPassword(user.getPassword());
         update.setRole(user.getRole());
         update.setHotelName(((Manager)user).getHotelName());
         update.setActivated(user.getActivated());
@@ -54,9 +57,11 @@ public class ProfileConfigurationService {
                 .orElseThrow(() -> new NotFoundException(String.format("Admin with id: %d does not exists.", userId)));
         User update = mapper.userDtoToUser(userDto);
         update.setId(userId);
+        update.setPassword(user.getPassword());
         update.setRole(user.getRole());
         update.setActivated(user.getActivated());
         userRepository.save(update);
+
         return userDto;
     }
 

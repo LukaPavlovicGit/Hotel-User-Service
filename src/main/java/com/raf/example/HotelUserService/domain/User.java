@@ -3,7 +3,7 @@ package com.raf.example.HotelUserService.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.sql.Date;
 
 
 @Entity

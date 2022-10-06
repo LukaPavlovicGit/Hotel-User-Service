@@ -1,7 +1,7 @@
 package com.raf.example.HotelUserService.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 public class Client extends User{

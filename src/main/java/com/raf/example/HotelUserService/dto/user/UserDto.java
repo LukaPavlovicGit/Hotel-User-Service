@@ -1,6 +1,6 @@
 package com.raf.example.HotelUserService.dto.user;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class UserDto {
 
@@ -14,6 +14,15 @@ public class UserDto {
     private boolean activated;
 
     public UserDto() {
+    }
+
+    public UserDto(String username, String firstName, String lastName, String email, String phoneNumber, Date birthdate) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.birthdate = birthdate;
     }
 
     public UserDto(String username, String firstName, String lastName, String email, String phoneNumber, Date birthdate, String roleName, boolean activated) {
