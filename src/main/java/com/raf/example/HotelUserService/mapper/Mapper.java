@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class Mapper {
 
     public UserDto userToUserDto(User user){
-        return new UserDto(user.getUsername(),user.getFirstName(),user.getLastName(),user.getEmail(),
+        return new UserDto(user.getId(), user.getUsername(),user.getFirstName(),user.getLastName(),user.getEmail(),
                 user.getPhoneNumber(),user.getBirthdate(),user.getRole().getName(), user.getActivated());
     }
     public User userDtoToUser(UserDto userDto){
@@ -45,7 +45,6 @@ public class Mapper {
     public ClientStatusDto clientStatusToClientStatusDto(ClientStatus clientStatus){
         return new ClientStatusDto(clientStatus.getUserId(), clientStatus.getAccessForbidden(),clientStatus.getDiscount(), null);
     }
-
     public Rank RankDtoToRank(RankDto rankDto){
         return new Rank(rankDto.getName(), rankDto.getReach());
     }

@@ -55,8 +55,8 @@ public class UserService {
         this.messageHelper = messageHelper;
     }
 
-    public List<UserDto> findAll() {
-        return userRepository.findAll().stream().map(mapper::userToUserDto).collect(Collectors.toList());
+    public Page<UserDto> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable).map(mapper::userToUserDto);
     }
 
     public UserDto findUserById(Long id) {
@@ -90,12 +90,12 @@ public class UserService {
     public ClientDto save(ClientCreateDto clientCreateDto) {
         Role role = roleRepository.findRoleByName("ROLE_CLIENT")
                 .orElseThrow(() -> new NotFoundException("Role with name: ROLE_CLIENT not found."));
+
         Client client = mapper.clientCreateDtoToClient(clientCreateDto);
         client.setRole(role);
         userRepository.save(client);
         Rank rank = rankRepository.findByName("BRONZE").orElseThrow(() -> new NotFoundException(""));
         clientStatusRepository.save(new ClientStatus(client.getId(), rank));
-
         sendEmail(new MessageDto("account_activation", client.getFirstName(), client.getLastName(),
                 "http://localhost:8080/api/users/activation/"+client.getId(),client.getEmail()));
 

@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class UserDto {
 
+    private Long id;
     private String username;
     private String firstName;
     private String lastName;
@@ -12,9 +13,9 @@ public class UserDto {
     private Date birthdate;
     private String roleName;
     private boolean activated;
+    private boolean blocked;
 
-    public UserDto() {
-    }
+    public UserDto() { }
 
     public UserDto(String username, String firstName, String lastName, String email, String phoneNumber, Date birthdate) {
         this.username = username;
@@ -25,7 +26,8 @@ public class UserDto {
         this.birthdate = birthdate;
     }
 
-    public UserDto(String username, String firstName, String lastName, String email, String phoneNumber, Date birthdate, String roleName, boolean activated) {
+    public UserDto(Long id, String username, String firstName, String lastName, String email, String phoneNumber, Date birthdate, String roleName, boolean activated) {
+        this.id = id;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,6 +36,14 @@ public class UserDto {
         this.birthdate = birthdate;
         this.roleName = roleName;
         this.activated = activated;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -98,6 +108,14 @@ public class UserDto {
 
     public void setActivated(boolean activated) {
         this.activated = activated;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 
     @Override

@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -29,8 +30,9 @@ public class UserController {
     @GetMapping
     @ApiOperation(value = "get all users")
     @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_MANAGER"})
-    public ResponseEntity<List<UserDto>> getAllUsers(@RequestHeader("authorization") String authorization) {
-        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+    public ResponseEntity<Page<UserDto>> getAllUsers(@RequestHeader("authorization") String authorization,
+                                                     @ApiIgnore Pageable pageable) {
+        return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
     }
     @GetMapping("/{id}")
     @ApiOperation(value = "get user by id")
@@ -40,7 +42,7 @@ public class UserController {
         return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/clients")
+    @GetMapping("/clients") // NE KORISTI SE NA KLIJENTSKOJ STRANI
     @ApiOperation(value = "get all clients")
     @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_MANAGER"})
     public ResponseEntity<List<ClientDto>> getClients(@RequestHeader("authorization") String authorization,
@@ -48,7 +50,7 @@ public class UserController {
         return new ResponseEntity<>(userService.findAllClients(pageable), HttpStatus.OK);
     }
 
-    @GetMapping("/managers")
+    @GetMapping("/managers")// NE KORISTI SE NA KLIJENTSKOJ STRANI
     @ApiOperation(value = "get all managers")
     @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_MANAGER"})
     public ResponseEntity<List<ManagerDto>> getManagers(@RequestHeader("authorization") String authorization,
