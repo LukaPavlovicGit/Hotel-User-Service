@@ -43,6 +43,7 @@ public class RankController {
     @CheckSecurity(roles = {"ROLE_ADMIN"})
     public ResponseEntity<RankDto> rankConfiguration(@RequestHeader("authorization") String authorization,
                                                      @RequestBody RankDto rankDto){
+        System.out.println(rankDto.toString());
         return new ResponseEntity<>(rankService.rankConfiguration(rankDto), HttpStatus.OK);
     }
 }

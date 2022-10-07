@@ -16,6 +16,10 @@ public class RankDto {
         this.reach = reach;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -34,5 +38,14 @@ public class RankDto {
 
     public void setReach(Integer reach) {
         this.reach = reach;
+    }
+
+    @Override
+    public String toString() {
+        return "RankDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", reach=" + reach +
+                '}';
     }
 }

@@ -46,9 +46,10 @@ public class RankService {
     }
     public RankDto rankConfiguration(RankDto rankDto) {
         Rank rank = rankRepository
-                .findByName(rankDto.getName())
+                .findById(rankDto.getId())
                 .orElseThrow(() -> new NotFoundException(String.format("Rank with a name: %s not found", rankDto.getName())));
         rank.setReach(rankDto.getReach());
+        rank.setName(rankDto.getName());
         rankRepository.save(rank);
         return rankDto;
     }
