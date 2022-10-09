@@ -42,6 +42,14 @@ public class TestDataRunner implements CommandLineRunner {
         roleRepository.save(roleAdmin);
         roleRepository.save(roleManager);
 
+        //insert ranks
+        Rank bronze = new Rank("BRONZE", 3);
+        Rank silver = new Rank("SILVER", 6);
+        Rank gold = new Rank("GOLD", -1);
+        rankRepository.save(bronze);
+        rankRepository.save(silver);
+        rankRepository.save(gold);
+
         //Insert admin
         User admin = new User();
         admin.setEmail("admin@gmail.com");
@@ -53,16 +61,70 @@ public class TestDataRunner implements CommandLineRunner {
         admin.setBirthdate(Date.valueOf("1990-10-10"));
         admin.setRole(roleAdmin);
         admin.setActivated(true);
-
         userRepository.save(admin);
 
-        //insert ranks
-        Rank bronze = new Rank("BRONZE", 3);
-        Rank silver = new Rank("SILVER", 6);
-        Rank gold = new Rank("GOLD", -1);
-        rankRepository.save(bronze);
-        rankRepository.save(silver);
-        rankRepository.save(gold);
+        //Insert two clients
+        Client c1 = new Client();
+        c1.setEmail("c1@gmail.com");
+        c1.setUsername("c1");
+        c1.setPassword("c1");
+        c1.setFirstName("Luka");
+        c1.setLastName("Pavlovic");
+        c1.setPhoneNumber("0641234567");
+        c1.setBirthdate(Date.valueOf("2000-10-10"));
+        c1.setRole(roleClient);
+        c1.setNumOfPassport("123553431");
+        c1.setActivated(true);
+
+        Client c2 = new Client();
+        c2.setEmail("c2@gmail.com");
+        c2.setUsername("c2");
+        c2.setPassword("c2");
+        c2.setFirstName("Sofija");
+        c2.setLastName("Todorovic");
+        c2.setPhoneNumber("0641234567");
+        c2.setBirthdate(Date.valueOf("2003-10-10"));
+        c2.setRole(roleClient);
+        c2.setNumOfPassport("33255123");
+        c2.setActivated(true);
+
+        userRepository.save(c1);
+        userRepository.save(c2);
+
+        ClientStatus k1Status = new ClientStatus(c1.getId(), bronze);
+        ClientStatus k2Status = new ClientStatus(c2.getId(), bronze);
+        clientStatusRepository.save(k1Status);
+        clientStatusRepository.save(k2Status);
+
+        //insert two managers
+        Manager m1 = new Manager();
+        m1.setEmail("m1@gmail.com");
+        m1.setUsername("m1");
+        m1.setPassword("m1");
+        m1.setFirstName("aaaaa");
+        m1.setLastName("1111111");
+        m1.setPhoneNumber("0641234567");
+        m1.setBirthdate(Date.valueOf("2000-8-10"));
+        m1.setRole(roleManager);
+        m1.setHireDate(Date.valueOf("2010-8-10"));
+        m1.setActivated(true);
+
+        Manager m2 = new Manager();
+        m2.setEmail("m2@gmail.com");
+        m2.setUsername("m2");
+        m2.setPassword("m2");
+        m2.setFirstName("bbbbbb");
+        m2.setLastName("222222222");
+        m2.setPhoneNumber("0641234567");
+        m2.setBirthdate(Date.valueOf("1999-8-10"));
+        m2.setRole(roleManager);
+        m2.setHireDate(Date.valueOf("2006-2-10"));
+        m2.setActivated(true);
+
+        userRepository.save(m1);
+        userRepository.save(m2);
+
+
 
         /*clientStatusRepository.deleteAll();
         userRepository.deleteAll();

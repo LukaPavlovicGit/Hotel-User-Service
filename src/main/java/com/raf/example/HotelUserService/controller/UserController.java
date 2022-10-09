@@ -36,9 +36,7 @@ public class UserController {
     }
     @GetMapping("/{id}")
     @ApiOperation(value = "get user by id")
-    @CheckSecurity(roles = {"ROLE_ADMIN", "ROLE_MANAGER"})
-    public ResponseEntity<UserDto> getUserById(@RequestHeader("authorization") String authorization,
-                                               @PathVariable("id") Long id){
+    public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id){
         return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
     }
 
@@ -89,12 +87,12 @@ public class UserController {
     }
     @ApiOperation(value = "Increment reservation")
     @PostMapping("/incrementReservation/{clientId}")
-    public ResponseEntity<ClientDto> incrementReservation(@PathVariable("clientId") Long clientId){
-        return new ResponseEntity<ClientDto>(userService.incrementNumOfReservation(clientId), HttpStatus.OK);
+    public void incrementReservation(@PathVariable("clientId") Long clientId){
+        userService.incrementNumOfReservation(clientId);
     }
     @ApiOperation(value = "Decrement reservation")
     @PostMapping("/decrementReservation/{clientId}")
-    public ResponseEntity<ClientDto> decrementReservation(@PathVariable("clientId") Long clientId){
-        return new ResponseEntity<ClientDto>(userService.decrementNumOfReservation(clientId), HttpStatus.OK);
+    public void decrementReservation(@PathVariable("clientId") Long clientId){
+        userService.decrementNumOfReservation(clientId);
     }
 }
